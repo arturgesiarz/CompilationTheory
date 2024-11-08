@@ -5,7 +5,7 @@ if __name__ == '__main__':
 
     # Otwierania pliku
     try:
-        filename = sys.argv[1] if len(sys.argv) > 1 else "lab01/example.txt"
+        filename = sys.argv[1] if len(sys.argv) > 1 else "lab01/data/example.txt"
         file = open(filename, "r")
     except IOError:
         print("Cannot open {0} file".format(filename))
@@ -17,7 +17,7 @@ if __name__ == '__main__':
     lexer.input(text)
     
     # Tokenizacja odczytanego kodu i zapis do pliku
-    with open('lab01/output.txt', 'w') as output_file:
+    with open('lab01/data/output.txt', 'w') as output_file:
       while True:
         tok = lexer.token()
         if not tok:
