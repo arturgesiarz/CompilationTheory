@@ -13,3 +13,14 @@ A[1,3] = 0 ;
 
 x = 2;
 y = 2.5;
+
+for i = 1:N-6+8 {
+    if(i<=N/16)
+        print i;
+    else if(i<=N/8)
+        break;
+    else if(i<=N/4)
+        continue;
+    else if(i<=N/2)
+        return 0;
+}

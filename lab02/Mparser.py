@@ -11,7 +11,7 @@ tokens = scanner.tokens
 precedence = (
   ('nonassoc', 'IFX'),
   ('nonassoc', 'ELSE'),
-  ('right', 'MULASSIGN', 'DIVASSIGN', 'SUBASSIGN', 'ADDASSIGN'),
+#   ('right', 'MULASSIGN', 'DIVASSIGN', 'SUBASSIGN', 'ADDASSIGN'),
   ('nonassoc', 'LT', 'GT', 'GE', 'LE', 'EQ', 'NE'),
   ("left", '+', '-'),
   ('left', 'DOTADD', 'DOTSUB'),
