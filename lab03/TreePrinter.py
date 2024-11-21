@@ -150,7 +150,7 @@ class TreePrinter:
     @addToClass(AST.MatrixFunction)
     def printTree(self, indent=0):
         print(TreePrinter.indent(indent) + self.function_name)
-        print(TreePrinter.indent(indent + 1) + self.function_arg)
+        print(TreePrinter.indent(indent + 1) + str(self.function_arg))
         
     @addToClass(AST.Vector)
     def printTree(self, indent=0):

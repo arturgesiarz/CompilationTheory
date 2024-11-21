@@ -131,6 +131,10 @@ def p_instruction_while(p):
     """instruction : WHILE '(' condition ')' instruction """
     p[0] = AST.While(p[3], p[5])
     
+def p_range(p):
+    """range : expression ':' expression """
+    p[0] = AST.Range(p[1], p[3])
+    
 
 # Określa reguły przypisania wartości do zmiennej (var),
 # elementu macierzy (matrix_element) lub 
