@@ -4,18 +4,20 @@ class Node(object):
 
 # wyrażenia binarne
 class BinExpr(Node):
-    def __init__(self, op, left, right):
-        self.op = op
+    def __init__(self, left, op, right):
         self.left = left
+        self.op = op
         self.right = right
-        
-        
-# wyrazanie relacyjne
-class IntNum(Node):
-    def __init__(self, value):
-        self.value = value
 
-class FloatNum(Node):
+
+# wyrażenia relacyjne
+class Condition(Node):
+    def __init__(self, left, op, right):
+        self.left = left
+        self.op = op
+        self.right = right
+          
+class Number(Node):
     def __init__(self, value):
         self.value = value
 

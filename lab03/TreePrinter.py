@@ -25,12 +25,14 @@ class TreePrinter:
         self.right.printTree(indent + 1)
         
         
-    # wyrazanie relacyjne
-    @addToClass(AST.IntNum)
+    # wyrazanie relacyjne   
+    @addToClass(AST.Condition)
     def printTree(self, indent=0):
-        print(TreePrinter.indent(indent) + str(self.value))
-        
-    @addToClass(AST.FloatNum)
+        print(TreePrinter.indent(indent) + self.op)
+        self.left.printTree(indent + 1)
+        self.right.printTree(indent + 1)
+    
+    @addToClass(AST.Number)
     def printTree(self, indent=0):
         print(TreePrinter.indent(indent) + str(self.value))
     
