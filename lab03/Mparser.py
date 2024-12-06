@@ -13,7 +13,7 @@ start = 'program'
 precedence = (
   ('nonassoc', 'IFX'),
   ('nonassoc', 'ELSE'),
-  ('right', 'MULASSIGN', 'DIVASSIGN', 'SUBASSIGN', 'ADDASSIGN'),
+#   ('right', 'MULASSIGN', 'DIVASSIGN', 'SUBASSIGN', 'ADDASSIGN'),
   ('nonassoc', 'LT', 'GT', 'GE', 'LE', 'EQ', 'NE'),
   ("left", '+', '-'),
   ('left', 'DOTADD', 'DOTSUB'),
@@ -60,11 +60,7 @@ def p_instructions_opt_2(p):
 # a reguła p_instructions_2 pozwala na pojedynczą instrukcję.
 def p_instructions_1(p):
     """instructions : instructions instruction """
-    if len(p) == 2:
-        p[0] = AST.Instructions(p[1])
-        
-    elif len(p) == 3:
-        p[0] = AST.Instructions(p[2], p[1])
+    p[0] = AST.Instructions(p[2], p[1])
 
 
 def p_instructions_2(p):
@@ -76,6 +72,7 @@ def p_instructions_2(p):
 # Instrukcja może być instrukcją systemową (sys_instruction), 
 # przypisaniem (assignment), 
 # lub blokiem instrukcji otoczonym nawiasami klamrowymi ({ instructions }).
+#  do innej funkcji!!!!
 def p_instruction(p):
     """instruction : sys_instruction ';'
                    | assignment ';'

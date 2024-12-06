@@ -1,3 +1,4 @@
+# Implemetnacja abstrakcyjnego drzewa skladni
 
 class Node(object):
     pass
