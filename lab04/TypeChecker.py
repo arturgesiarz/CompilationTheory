@@ -182,12 +182,16 @@ class TypeChecker(NodeVisitor):
 
     def visit_For(self, node):
         self.symbol_table = self.symbol_table.pushScope('new')
+        
         ex_symbol = VariableSymbol('Variable', 'int')
+        
         self.symbol_table.put(node.id, ex_symbol)
         self.visit(node.ne1)
         self.visit(node.ne2)
+        
         global nested_loops_number
         nested_loops_number += 1
+        
         self.visit(node.instruction)
         nested_loops_number -= 1
         self.symbol_table = self.symbol_table.popScope()
@@ -211,7 +215,6 @@ class TypeChecker(NodeVisitor):
     def visit_Print(self, node):
         for element in node.body:
             self.visit(element)
-
 
     def visit_If(self,node):
         self.visit(node.expression)
