@@ -1,0 +1,3949 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> instructions
+Rule 1     instructions -> instruction
+Rule 2     instructions -> instruction instructions
+Rule 3     instruction -> block
+Rule 4     instruction -> conditional
+Rule 5     instruction -> loop
+Rule 6     instruction -> statement SEMICOLON
+Rule 7     instruction -> error SEMICOLON
+Rule 8     statement -> assignment
+Rule 9     statement -> flow_keyword
+Rule 10    statement -> fun
+Rule 11    statement -> return
+Rule 12    statement -> print
+Rule 13    flow_keyword -> BREAK
+Rule 14    flow_keyword -> CONTINUE
+Rule 15    block -> CURLYOPEN instructions CURLYCLOSE
+Rule 16    block -> CURLYOPEN error CURLYCLOSE
+Rule 17    print -> PRINT print_body
+Rule 18    print_body -> string
+Rule 19    print_body -> expression
+Rule 20    print_body -> string COMMA print_body
+Rule 21    print_body -> expression COMMA print_body
+Rule 22    return -> RETURN expression
+Rule 23    return -> RETURN
+Rule 24    string -> STRING
+Rule 25    conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction
+Rule 26    conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+Rule 27    loop -> while
+Rule 28    loop -> for
+Rule 29    while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+Rule 30    for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+Rule 31    fun -> fun_name ROUNDOPEN fun_body ROUNDCLOSE
+Rule 32    fun -> fun_name ROUNDOPEN error ROUNDCLOSE
+Rule 33    fun_body -> numeric_expression
+Rule 34    fun_body -> numeric_expression COMMA fun_body
+Rule 35    fun_name -> ZEROS
+Rule 36    fun_name -> ONES
+Rule 37    fun_name -> EYE
+Rule 38    assignment -> assignment_left_side assignment_operator expression
+Rule 39    assignment -> assignment_left_side ASSIGN string
+Rule 40    assignment -> assignment_left_side ASSIGN matrix
+Rule 41    assignment -> assignment_left_side ASSIGN vector
+Rule 42    assignment_left_side -> var
+Rule 43    assignment_operator -> ASSIGN
+Rule 44    assignment_operator -> ADDASSIGN
+Rule 45    assignment_operator -> SUBASSIGN
+Rule 46    assignment_operator -> MULASSIGN
+Rule 47    assignment_operator -> DIVASSIGN
+Rule 48    matrix -> SQUAREOPEN matrix_body SQUARECLOSE
+Rule 49    matrix_body -> vector
+Rule 50    matrix_body -> vector COMMA matrix_body
+Rule 51    vector -> SQUAREOPEN vector_body SQUARECLOSE
+Rule 52    vector -> SQUAREOPEN SQUARECLOSE
+Rule 53    vector_body -> numeric_expression
+Rule 54    vector_body -> numeric_expression COMMA vector_body
+Rule 55    expression -> comparison_expression
+Rule 56    expression -> numeric_expression
+Rule 57    expression -> fun
+Rule 58    comparison_expression -> numeric_expression L numeric_expression
+Rule 59    comparison_expression -> numeric_expression G numeric_expression
+Rule 60    comparison_expression -> numeric_expression EQ numeric_expression
+Rule 61    comparison_expression -> numeric_expression NEQ numeric_expression
+Rule 62    comparison_expression -> numeric_expression GE numeric_expression
+Rule 63    comparison_expression -> numeric_expression LE numeric_expression
+Rule 64    comparison_expression -> ROUNDOPEN comparison_expression ROUNDCLOSE
+Rule 65    numeric_expression -> numeric_expression ADD term
+Rule 66    numeric_expression -> numeric_expression SUB term
+Rule 67    numeric_expression -> numeric_expression DOTADD term
+Rule 68    numeric_expression -> numeric_expression DOTSUB term
+Rule 69    numeric_expression -> term
+Rule 70    term -> term MUL factor
+Rule 71    term -> term DIV factor
+Rule 72    term -> term DOTMUL factor
+Rule 73    term -> term DOTDIV factor
+Rule 74    term -> factor
+Rule 75    factor -> FLOATNUM
+Rule 76    factor -> INTNUM
+Rule 77    factor -> var
+Rule 78    factor -> ROUNDOPEN numeric_expression ROUNDCLOSE
+Rule 79    factor -> unary_operator
+Rule 80    unary_operator -> negation
+Rule 81    unary_operator -> transposition
+Rule 82    negation -> SUB factor
+Rule 83    transposition -> factor TRANSPOSITION
+Rule 84    var -> ID
+Rule 85    var -> ID SQUAREOPEN fun_body SQUARECLOSE
+
+Terminals, with rules where they appear
+
+ADD                  : 65
+ADDASSIGN            : 44
+ASSIGN               : 30 39 40 41 43
+BREAK                : 13
+COMMA                : 20 21 34 50 54
+CONTINUE             : 14
+CURLYCLOSE           : 15 16
+CURLYOPEN            : 15 16
+DIV                  : 71
+DIVASSIGN            : 47
+DOTADD               : 67
+DOTDIV               : 73
+DOTMUL               : 72
+DOTSUB               : 68
+ELSE                 : 26
+EQ                   : 60
+EYE                  : 37
+FLOATNUM             : 75
+FOR                  : 30
+G                    : 59
+GE                   : 62
+ID                   : 30 84 85
+IF                   : 25 26
+INTNUM               : 76
+L                    : 58
+LE                   : 63
+MUL                  : 70
+MULASSIGN            : 46
+NEQ                  : 61
+ONES                 : 36
+PRINT                : 17
+RANGE                : 30
+RETURN               : 22 23
+ROUNDCLOSE           : 25 26 29 31 32 64 78
+ROUNDOPEN            : 25 26 29 31 32 64 78
+SEMICOLON            : 6 7
+SQUARECLOSE          : 48 51 52 85
+SQUAREOPEN           : 48 51 52 85
+STRING               : 24
+SUB                  : 66 82
+SUBASSIGN            : 45
+TRANSPOSITION        : 83
+WHILE                : 29
+ZEROS                : 35
+error                : 7 16 32
+
+Nonterminals, with rules where they appear
+
+assignment           : 8
+assignment_left_side : 38 39 40 41
+assignment_operator  : 38
+block                : 3
+comparison_expression : 55 64
+conditional          : 4
+expression           : 19 21 22 25 26 29 38
+factor               : 70 71 72 73 74 82 83
+flow_keyword         : 9
+for                  : 28
+fun                  : 10 57
+fun_body             : 31 34 85
+fun_name             : 31 32
+instruction          : 1 2 25 26 26 29 30
+instructions         : 2 15 0
+loop                 : 5
+matrix               : 40
+matrix_body          : 48 50
+negation             : 80
+numeric_expression   : 30 30 33 34 53 54 56 58 58 59 59 60 60 61 61 62 62 63 63 65 66 67 68 78
+print                : 12
+print_body           : 17 20 21
+return               : 11
+statement            : 6
+string               : 18 20 39
+term                 : 65 66 67 68 69 70 71 72 73
+transposition        : 81
+unary_operator       : 79
+var                  : 42 77
+vector               : 41 49 50
+vector_body          : 51 54
+while                : 27
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . instructions
+    (1) instructions -> . instruction
+    (2) instructions -> . instruction instructions
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    error           shift and go to state 7
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instructions                   shift and go to state 1
+    instruction                    shift and go to state 2
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 1
+
+    (0) S' -> instructions .
+
+
+
+state 2
+
+    (1) instructions -> instruction .
+    (2) instructions -> instruction . instructions
+    (1) instructions -> . instruction
+    (2) instructions -> . instruction instructions
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    $end            reduce using rule 1 (instructions -> instruction .)
+    CURLYCLOSE      reduce using rule 1 (instructions -> instruction .)
+    error           shift and go to state 7
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instruction                    shift and go to state 2
+    instructions                   shift and go to state 30
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 3
+
+    (3) instruction -> block .
+
+    error           reduce using rule 3 (instruction -> block .)
+    CURLYOPEN       reduce using rule 3 (instruction -> block .)
+    IF              reduce using rule 3 (instruction -> block .)
+    WHILE           reduce using rule 3 (instruction -> block .)
+    FOR             reduce using rule 3 (instruction -> block .)
+    BREAK           reduce using rule 3 (instruction -> block .)
+    CONTINUE        reduce using rule 3 (instruction -> block .)
+    RETURN          reduce using rule 3 (instruction -> block .)
+    PRINT           reduce using rule 3 (instruction -> block .)
+    ZEROS           reduce using rule 3 (instruction -> block .)
+    ONES            reduce using rule 3 (instruction -> block .)
+    EYE             reduce using rule 3 (instruction -> block .)
+    ID              reduce using rule 3 (instruction -> block .)
+    $end            reduce using rule 3 (instruction -> block .)
+    CURLYCLOSE      reduce using rule 3 (instruction -> block .)
+    ELSE            reduce using rule 3 (instruction -> block .)
+
+
+state 4
+
+    (4) instruction -> conditional .
+
+    error           reduce using rule 4 (instruction -> conditional .)
+    CURLYOPEN       reduce using rule 4 (instruction -> conditional .)
+    IF              reduce using rule 4 (instruction -> conditional .)
+    WHILE           reduce using rule 4 (instruction -> conditional .)
+    FOR             reduce using rule 4 (instruction -> conditional .)
+    BREAK           reduce using rule 4 (instruction -> conditional .)
+    CONTINUE        reduce using rule 4 (instruction -> conditional .)
+    RETURN          reduce using rule 4 (instruction -> conditional .)
+    PRINT           reduce using rule 4 (instruction -> conditional .)
+    ZEROS           reduce using rule 4 (instruction -> conditional .)
+    ONES            reduce using rule 4 (instruction -> conditional .)
+    EYE             reduce using rule 4 (instruction -> conditional .)
+    ID              reduce using rule 4 (instruction -> conditional .)
+    $end            reduce using rule 4 (instruction -> conditional .)
+    CURLYCLOSE      reduce using rule 4 (instruction -> conditional .)
+    ELSE            reduce using rule 4 (instruction -> conditional .)
+
+
+state 5
+
+    (5) instruction -> loop .
+
+    error           reduce using rule 5 (instruction -> loop .)
+    CURLYOPEN       reduce using rule 5 (instruction -> loop .)
+    IF              reduce using rule 5 (instruction -> loop .)
+    WHILE           reduce using rule 5 (instruction -> loop .)
+    FOR             reduce using rule 5 (instruction -> loop .)
+    BREAK           reduce using rule 5 (instruction -> loop .)
+    CONTINUE        reduce using rule 5 (instruction -> loop .)
+    RETURN          reduce using rule 5 (instruction -> loop .)
+    PRINT           reduce using rule 5 (instruction -> loop .)
+    ZEROS           reduce using rule 5 (instruction -> loop .)
+    ONES            reduce using rule 5 (instruction -> loop .)
+    EYE             reduce using rule 5 (instruction -> loop .)
+    ID              reduce using rule 5 (instruction -> loop .)
+    $end            reduce using rule 5 (instruction -> loop .)
+    CURLYCLOSE      reduce using rule 5 (instruction -> loop .)
+    ELSE            reduce using rule 5 (instruction -> loop .)
+
+
+state 6
+
+    (6) instruction -> statement . SEMICOLON
+
+    SEMICOLON       shift and go to state 31
+
+
+state 7
+
+    (7) instruction -> error . SEMICOLON
+
+    SEMICOLON       shift and go to state 32
+
+
+state 8
+
+    (15) block -> CURLYOPEN . instructions CURLYCLOSE
+    (16) block -> CURLYOPEN . error CURLYCLOSE
+    (1) instructions -> . instruction
+    (2) instructions -> . instruction instructions
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    error           shift and go to state 34
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instructions                   shift and go to state 33
+    instruction                    shift and go to state 2
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 9
+
+    (25) conditional -> IF . ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> IF . ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+
+    ROUNDOPEN       shift and go to state 35
+
+
+state 10
+
+    (27) loop -> while .
+
+    error           reduce using rule 27 (loop -> while .)
+    CURLYOPEN       reduce using rule 27 (loop -> while .)
+    IF              reduce using rule 27 (loop -> while .)
+    WHILE           reduce using rule 27 (loop -> while .)
+    FOR             reduce using rule 27 (loop -> while .)
+    BREAK           reduce using rule 27 (loop -> while .)
+    CONTINUE        reduce using rule 27 (loop -> while .)
+    RETURN          reduce using rule 27 (loop -> while .)
+    PRINT           reduce using rule 27 (loop -> while .)
+    ZEROS           reduce using rule 27 (loop -> while .)
+    ONES            reduce using rule 27 (loop -> while .)
+    EYE             reduce using rule 27 (loop -> while .)
+    ID              reduce using rule 27 (loop -> while .)
+    $end            reduce using rule 27 (loop -> while .)
+    CURLYCLOSE      reduce using rule 27 (loop -> while .)
+    ELSE            reduce using rule 27 (loop -> while .)
+
+
+state 11
+
+    (28) loop -> for .
+
+    error           reduce using rule 28 (loop -> for .)
+    CURLYOPEN       reduce using rule 28 (loop -> for .)
+    IF              reduce using rule 28 (loop -> for .)
+    WHILE           reduce using rule 28 (loop -> for .)
+    FOR             reduce using rule 28 (loop -> for .)
+    BREAK           reduce using rule 28 (loop -> for .)
+    CONTINUE        reduce using rule 28 (loop -> for .)
+    RETURN          reduce using rule 28 (loop -> for .)
+    PRINT           reduce using rule 28 (loop -> for .)
+    ZEROS           reduce using rule 28 (loop -> for .)
+    ONES            reduce using rule 28 (loop -> for .)
+    EYE             reduce using rule 28 (loop -> for .)
+    ID              reduce using rule 28 (loop -> for .)
+    $end            reduce using rule 28 (loop -> for .)
+    CURLYCLOSE      reduce using rule 28 (loop -> for .)
+    ELSE            reduce using rule 28 (loop -> for .)
+
+
+state 12
+
+    (8) statement -> assignment .
+
+    SEMICOLON       reduce using rule 8 (statement -> assignment .)
+
+
+state 13
+
+    (9) statement -> flow_keyword .
+
+    SEMICOLON       reduce using rule 9 (statement -> flow_keyword .)
+
+
+state 14
+
+    (10) statement -> fun .
+
+    SEMICOLON       reduce using rule 10 (statement -> fun .)
+
+
+state 15
+
+    (11) statement -> return .
+
+    SEMICOLON       reduce using rule 11 (statement -> return .)
+
+
+state 16
+
+    (12) statement -> print .
+
+    SEMICOLON       reduce using rule 12 (statement -> print .)
+
+
+state 17
+
+    (29) while -> WHILE . ROUNDOPEN expression ROUNDCLOSE instruction
+
+    ROUNDOPEN       shift and go to state 36
+
+
+state 18
+
+    (30) for -> FOR . ID ASSIGN numeric_expression RANGE numeric_expression instruction
+
+    ID              shift and go to state 37
+
+
+state 19
+
+    (84) var -> ID .
+    (85) var -> ID . SQUAREOPEN fun_body SQUARECLOSE
+
+    ASSIGN          reduce using rule 84 (var -> ID .)
+    ADDASSIGN       reduce using rule 84 (var -> ID .)
+    SUBASSIGN       reduce using rule 84 (var -> ID .)
+    MULASSIGN       reduce using rule 84 (var -> ID .)
+    DIVASSIGN       reduce using rule 84 (var -> ID .)
+    TRANSPOSITION   reduce using rule 84 (var -> ID .)
+    MUL             reduce using rule 84 (var -> ID .)
+    DIV             reduce using rule 84 (var -> ID .)
+    DOTMUL          reduce using rule 84 (var -> ID .)
+    DOTDIV          reduce using rule 84 (var -> ID .)
+    L               reduce using rule 84 (var -> ID .)
+    G               reduce using rule 84 (var -> ID .)
+    EQ              reduce using rule 84 (var -> ID .)
+    NEQ             reduce using rule 84 (var -> ID .)
+    GE              reduce using rule 84 (var -> ID .)
+    LE              reduce using rule 84 (var -> ID .)
+    ADD             reduce using rule 84 (var -> ID .)
+    SUB             reduce using rule 84 (var -> ID .)
+    DOTADD          reduce using rule 84 (var -> ID .)
+    DOTSUB          reduce using rule 84 (var -> ID .)
+    SEMICOLON       reduce using rule 84 (var -> ID .)
+    COMMA           reduce using rule 84 (var -> ID .)
+    ROUNDCLOSE      reduce using rule 84 (var -> ID .)
+    SQUARECLOSE     reduce using rule 84 (var -> ID .)
+    RANGE           reduce using rule 84 (var -> ID .)
+    error           reduce using rule 84 (var -> ID .)
+    CURLYOPEN       reduce using rule 84 (var -> ID .)
+    IF              reduce using rule 84 (var -> ID .)
+    WHILE           reduce using rule 84 (var -> ID .)
+    FOR             reduce using rule 84 (var -> ID .)
+    BREAK           reduce using rule 84 (var -> ID .)
+    CONTINUE        reduce using rule 84 (var -> ID .)
+    RETURN          reduce using rule 84 (var -> ID .)
+    PRINT           reduce using rule 84 (var -> ID .)
+    ZEROS           reduce using rule 84 (var -> ID .)
+    ONES            reduce using rule 84 (var -> ID .)
+    EYE             reduce using rule 84 (var -> ID .)
+    ID              reduce using rule 84 (var -> ID .)
+    SQUAREOPEN      shift and go to state 38
+
+
+state 20
+
+    (38) assignment -> assignment_left_side . assignment_operator expression
+    (39) assignment -> assignment_left_side . ASSIGN string
+    (40) assignment -> assignment_left_side . ASSIGN matrix
+    (41) assignment -> assignment_left_side . ASSIGN vector
+    (43) assignment_operator -> . ASSIGN
+    (44) assignment_operator -> . ADDASSIGN
+    (45) assignment_operator -> . SUBASSIGN
+    (46) assignment_operator -> . MULASSIGN
+    (47) assignment_operator -> . DIVASSIGN
+
+    ASSIGN          shift and go to state 40
+    ADDASSIGN       shift and go to state 41
+    SUBASSIGN       shift and go to state 42
+    MULASSIGN       shift and go to state 43
+    DIVASSIGN       shift and go to state 44
+
+    assignment_operator            shift and go to state 39
+
+state 21
+
+    (13) flow_keyword -> BREAK .
+
+    SEMICOLON       reduce using rule 13 (flow_keyword -> BREAK .)
+
+
+state 22
+
+    (14) flow_keyword -> CONTINUE .
+
+    SEMICOLON       reduce using rule 14 (flow_keyword -> CONTINUE .)
+
+
+state 23
+
+    (31) fun -> fun_name . ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> fun_name . ROUNDOPEN error ROUNDCLOSE
+
+    ROUNDOPEN       shift and go to state 45
+
+
+state 24
+
+    (22) return -> RETURN . expression
+    (23) return -> RETURN .
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    SEMICOLON       reduce using rule 23 (return -> RETURN .)
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    expression                     shift and go to state 46
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 25
+
+    (17) print -> PRINT . print_body
+    (18) print_body -> . string
+    (19) print_body -> . expression
+    (20) print_body -> . string COMMA print_body
+    (21) print_body -> . expression COMMA print_body
+    (24) string -> . STRING
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    STRING          shift and go to state 63
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    print_body                     shift and go to state 60
+    string                         shift and go to state 61
+    expression                     shift and go to state 62
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 26
+
+    (42) assignment_left_side -> var .
+
+    ASSIGN          reduce using rule 42 (assignment_left_side -> var .)
+    ADDASSIGN       reduce using rule 42 (assignment_left_side -> var .)
+    SUBASSIGN       reduce using rule 42 (assignment_left_side -> var .)
+    MULASSIGN       reduce using rule 42 (assignment_left_side -> var .)
+    DIVASSIGN       reduce using rule 42 (assignment_left_side -> var .)
+
+
+state 27
+
+    (35) fun_name -> ZEROS .
+
+    ROUNDOPEN       reduce using rule 35 (fun_name -> ZEROS .)
+
+
+state 28
+
+    (36) fun_name -> ONES .
+
+    ROUNDOPEN       reduce using rule 36 (fun_name -> ONES .)
+
+
+state 29
+
+    (37) fun_name -> EYE .
+
+    ROUNDOPEN       reduce using rule 37 (fun_name -> EYE .)
+
+
+state 30
+
+    (2) instructions -> instruction instructions .
+
+    $end            reduce using rule 2 (instructions -> instruction instructions .)
+    CURLYCLOSE      reduce using rule 2 (instructions -> instruction instructions .)
+
+
+state 31
+
+    (6) instruction -> statement SEMICOLON .
+
+    error           reduce using rule 6 (instruction -> statement SEMICOLON .)
+    CURLYOPEN       reduce using rule 6 (instruction -> statement SEMICOLON .)
+    IF              reduce using rule 6 (instruction -> statement SEMICOLON .)
+    WHILE           reduce using rule 6 (instruction -> statement SEMICOLON .)
+    FOR             reduce using rule 6 (instruction -> statement SEMICOLON .)
+    BREAK           reduce using rule 6 (instruction -> statement SEMICOLON .)
+    CONTINUE        reduce using rule 6 (instruction -> statement SEMICOLON .)
+    RETURN          reduce using rule 6 (instruction -> statement SEMICOLON .)
+    PRINT           reduce using rule 6 (instruction -> statement SEMICOLON .)
+    ZEROS           reduce using rule 6 (instruction -> statement SEMICOLON .)
+    ONES            reduce using rule 6 (instruction -> statement SEMICOLON .)
+    EYE             reduce using rule 6 (instruction -> statement SEMICOLON .)
+    ID              reduce using rule 6 (instruction -> statement SEMICOLON .)
+    $end            reduce using rule 6 (instruction -> statement SEMICOLON .)
+    CURLYCLOSE      reduce using rule 6 (instruction -> statement SEMICOLON .)
+    ELSE            reduce using rule 6 (instruction -> statement SEMICOLON .)
+
+
+state 32
+
+    (7) instruction -> error SEMICOLON .
+
+    error           reduce using rule 7 (instruction -> error SEMICOLON .)
+    CURLYOPEN       reduce using rule 7 (instruction -> error SEMICOLON .)
+    IF              reduce using rule 7 (instruction -> error SEMICOLON .)
+    WHILE           reduce using rule 7 (instruction -> error SEMICOLON .)
+    FOR             reduce using rule 7 (instruction -> error SEMICOLON .)
+    BREAK           reduce using rule 7 (instruction -> error SEMICOLON .)
+    CONTINUE        reduce using rule 7 (instruction -> error SEMICOLON .)
+    RETURN          reduce using rule 7 (instruction -> error SEMICOLON .)
+    PRINT           reduce using rule 7 (instruction -> error SEMICOLON .)
+    ZEROS           reduce using rule 7 (instruction -> error SEMICOLON .)
+    ONES            reduce using rule 7 (instruction -> error SEMICOLON .)
+    EYE             reduce using rule 7 (instruction -> error SEMICOLON .)
+    ID              reduce using rule 7 (instruction -> error SEMICOLON .)
+    $end            reduce using rule 7 (instruction -> error SEMICOLON .)
+    CURLYCLOSE      reduce using rule 7 (instruction -> error SEMICOLON .)
+    ELSE            reduce using rule 7 (instruction -> error SEMICOLON .)
+
+
+state 33
+
+    (15) block -> CURLYOPEN instructions . CURLYCLOSE
+
+    CURLYCLOSE      shift and go to state 64
+
+
+state 34
+
+    (16) block -> CURLYOPEN error . CURLYCLOSE
+    (7) instruction -> error . SEMICOLON
+
+    CURLYCLOSE      shift and go to state 65
+    SEMICOLON       shift and go to state 32
+
+
+state 35
+
+    (25) conditional -> IF ROUNDOPEN . expression ROUNDCLOSE instruction
+    (26) conditional -> IF ROUNDOPEN . expression ROUNDCLOSE instruction ELSE instruction
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    expression                     shift and go to state 66
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 36
+
+    (29) while -> WHILE ROUNDOPEN . expression ROUNDCLOSE instruction
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    expression                     shift and go to state 67
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 37
+
+    (30) for -> FOR ID . ASSIGN numeric_expression RANGE numeric_expression instruction
+
+    ASSIGN          shift and go to state 68
+
+
+state 38
+
+    (85) var -> ID SQUAREOPEN . fun_body SQUARECLOSE
+    (33) fun_body -> . numeric_expression
+    (34) fun_body -> . numeric_expression COMMA fun_body
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    fun_body                       shift and go to state 69
+    numeric_expression             shift and go to state 70
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 39
+
+    (38) assignment -> assignment_left_side assignment_operator . expression
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    expression                     shift and go to state 72
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 40
+
+    (39) assignment -> assignment_left_side ASSIGN . string
+    (40) assignment -> assignment_left_side ASSIGN . matrix
+    (41) assignment -> assignment_left_side ASSIGN . vector
+    (43) assignment_operator -> ASSIGN .
+    (24) string -> . STRING
+    (48) matrix -> . SQUAREOPEN matrix_body SQUARECLOSE
+    (51) vector -> . SQUAREOPEN vector_body SQUARECLOSE
+    (52) vector -> . SQUAREOPEN SQUARECLOSE
+
+    ROUNDOPEN       reduce using rule 43 (assignment_operator -> ASSIGN .)
+    ZEROS           reduce using rule 43 (assignment_operator -> ASSIGN .)
+    ONES            reduce using rule 43 (assignment_operator -> ASSIGN .)
+    EYE             reduce using rule 43 (assignment_operator -> ASSIGN .)
+    FLOATNUM        reduce using rule 43 (assignment_operator -> ASSIGN .)
+    INTNUM          reduce using rule 43 (assignment_operator -> ASSIGN .)
+    ID              reduce using rule 43 (assignment_operator -> ASSIGN .)
+    SUB             reduce using rule 43 (assignment_operator -> ASSIGN .)
+    STRING          shift and go to state 63
+    SQUAREOPEN      shift and go to state 76
+
+    string                         shift and go to state 73
+    matrix                         shift and go to state 74
+    vector                         shift and go to state 75
+
+state 41
+
+    (44) assignment_operator -> ADDASSIGN .
+
+    ROUNDOPEN       reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    ZEROS           reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    ONES            reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    EYE             reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    FLOATNUM        reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    INTNUM          reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    ID              reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+    SUB             reduce using rule 44 (assignment_operator -> ADDASSIGN .)
+
+
+state 42
+
+    (45) assignment_operator -> SUBASSIGN .
+
+    ROUNDOPEN       reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    ZEROS           reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    ONES            reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    EYE             reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    FLOATNUM        reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    INTNUM          reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    ID              reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+    SUB             reduce using rule 45 (assignment_operator -> SUBASSIGN .)
+
+
+state 43
+
+    (46) assignment_operator -> MULASSIGN .
+
+    ROUNDOPEN       reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    ZEROS           reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    ONES            reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    EYE             reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    FLOATNUM        reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    INTNUM          reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    ID              reduce using rule 46 (assignment_operator -> MULASSIGN .)
+    SUB             reduce using rule 46 (assignment_operator -> MULASSIGN .)
+
+
+state 44
+
+    (47) assignment_operator -> DIVASSIGN .
+
+    ROUNDOPEN       reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    ZEROS           reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    ONES            reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    EYE             reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    FLOATNUM        reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    INTNUM          reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    ID              reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+    SUB             reduce using rule 47 (assignment_operator -> DIVASSIGN .)
+
+
+state 45
+
+    (31) fun -> fun_name ROUNDOPEN . fun_body ROUNDCLOSE
+    (32) fun -> fun_name ROUNDOPEN . error ROUNDCLOSE
+    (33) fun_body -> . numeric_expression
+    (34) fun_body -> . numeric_expression COMMA fun_body
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    error           shift and go to state 78
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    fun_body                       shift and go to state 77
+    numeric_expression             shift and go to state 70
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 46
+
+    (22) return -> RETURN expression .
+
+    SEMICOLON       reduce using rule 22 (return -> RETURN expression .)
+
+
+state 47
+
+    (55) expression -> comparison_expression .
+
+    SEMICOLON       reduce using rule 55 (expression -> comparison_expression .)
+    COMMA           reduce using rule 55 (expression -> comparison_expression .)
+    ROUNDCLOSE      reduce using rule 55 (expression -> comparison_expression .)
+
+
+state 48
+
+    (56) expression -> numeric_expression .
+    (58) comparison_expression -> numeric_expression . L numeric_expression
+    (59) comparison_expression -> numeric_expression . G numeric_expression
+    (60) comparison_expression -> numeric_expression . EQ numeric_expression
+    (61) comparison_expression -> numeric_expression . NEQ numeric_expression
+    (62) comparison_expression -> numeric_expression . GE numeric_expression
+    (63) comparison_expression -> numeric_expression . LE numeric_expression
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 56 (expression -> numeric_expression .)
+    COMMA           reduce using rule 56 (expression -> numeric_expression .)
+    ROUNDCLOSE      reduce using rule 56 (expression -> numeric_expression .)
+    L               shift and go to state 79
+    G               shift and go to state 80
+    EQ              shift and go to state 81
+    NEQ             shift and go to state 82
+    GE              shift and go to state 83
+    LE              shift and go to state 84
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 49
+
+    (57) expression -> fun .
+
+    SEMICOLON       reduce using rule 57 (expression -> fun .)
+    COMMA           reduce using rule 57 (expression -> fun .)
+    ROUNDCLOSE      reduce using rule 57 (expression -> fun .)
+
+
+state 50
+
+    (64) comparison_expression -> ROUNDOPEN . comparison_expression ROUNDCLOSE
+    (78) factor -> ROUNDOPEN . numeric_expression ROUNDCLOSE
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    ROUNDOPEN       shift and go to state 50
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    comparison_expression          shift and go to state 89
+    numeric_expression             shift and go to state 90
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 51
+
+    (69) numeric_expression -> term .
+    (70) term -> term . MUL factor
+    (71) term -> term . DIV factor
+    (72) term -> term . DOTMUL factor
+    (73) term -> term . DOTDIV factor
+
+    L               reduce using rule 69 (numeric_expression -> term .)
+    G               reduce using rule 69 (numeric_expression -> term .)
+    EQ              reduce using rule 69 (numeric_expression -> term .)
+    NEQ             reduce using rule 69 (numeric_expression -> term .)
+    GE              reduce using rule 69 (numeric_expression -> term .)
+    LE              reduce using rule 69 (numeric_expression -> term .)
+    ADD             reduce using rule 69 (numeric_expression -> term .)
+    SUB             reduce using rule 69 (numeric_expression -> term .)
+    DOTADD          reduce using rule 69 (numeric_expression -> term .)
+    DOTSUB          reduce using rule 69 (numeric_expression -> term .)
+    SEMICOLON       reduce using rule 69 (numeric_expression -> term .)
+    COMMA           reduce using rule 69 (numeric_expression -> term .)
+    ROUNDCLOSE      reduce using rule 69 (numeric_expression -> term .)
+    SQUARECLOSE     reduce using rule 69 (numeric_expression -> term .)
+    RANGE           reduce using rule 69 (numeric_expression -> term .)
+    error           reduce using rule 69 (numeric_expression -> term .)
+    CURLYOPEN       reduce using rule 69 (numeric_expression -> term .)
+    IF              reduce using rule 69 (numeric_expression -> term .)
+    WHILE           reduce using rule 69 (numeric_expression -> term .)
+    FOR             reduce using rule 69 (numeric_expression -> term .)
+    BREAK           reduce using rule 69 (numeric_expression -> term .)
+    CONTINUE        reduce using rule 69 (numeric_expression -> term .)
+    RETURN          reduce using rule 69 (numeric_expression -> term .)
+    PRINT           reduce using rule 69 (numeric_expression -> term .)
+    ZEROS           reduce using rule 69 (numeric_expression -> term .)
+    ONES            reduce using rule 69 (numeric_expression -> term .)
+    EYE             reduce using rule 69 (numeric_expression -> term .)
+    ID              reduce using rule 69 (numeric_expression -> term .)
+    MUL             shift and go to state 91
+    DIV             shift and go to state 92
+    DOTMUL          shift and go to state 93
+    DOTDIV          shift and go to state 94
+
+
+state 52
+
+    (82) negation -> SUB . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    factor                         shift and go to state 95
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 53
+
+    (74) term -> factor .
+    (83) transposition -> factor . TRANSPOSITION
+
+    MUL             reduce using rule 74 (term -> factor .)
+    DIV             reduce using rule 74 (term -> factor .)
+    DOTMUL          reduce using rule 74 (term -> factor .)
+    DOTDIV          reduce using rule 74 (term -> factor .)
+    L               reduce using rule 74 (term -> factor .)
+    G               reduce using rule 74 (term -> factor .)
+    EQ              reduce using rule 74 (term -> factor .)
+    NEQ             reduce using rule 74 (term -> factor .)
+    GE              reduce using rule 74 (term -> factor .)
+    LE              reduce using rule 74 (term -> factor .)
+    ADD             reduce using rule 74 (term -> factor .)
+    SUB             reduce using rule 74 (term -> factor .)
+    DOTADD          reduce using rule 74 (term -> factor .)
+    DOTSUB          reduce using rule 74 (term -> factor .)
+    SEMICOLON       reduce using rule 74 (term -> factor .)
+    COMMA           reduce using rule 74 (term -> factor .)
+    ROUNDCLOSE      reduce using rule 74 (term -> factor .)
+    SQUARECLOSE     reduce using rule 74 (term -> factor .)
+    RANGE           reduce using rule 74 (term -> factor .)
+    error           reduce using rule 74 (term -> factor .)
+    CURLYOPEN       reduce using rule 74 (term -> factor .)
+    IF              reduce using rule 74 (term -> factor .)
+    WHILE           reduce using rule 74 (term -> factor .)
+    FOR             reduce using rule 74 (term -> factor .)
+    BREAK           reduce using rule 74 (term -> factor .)
+    CONTINUE        reduce using rule 74 (term -> factor .)
+    RETURN          reduce using rule 74 (term -> factor .)
+    PRINT           reduce using rule 74 (term -> factor .)
+    ZEROS           reduce using rule 74 (term -> factor .)
+    ONES            reduce using rule 74 (term -> factor .)
+    EYE             reduce using rule 74 (term -> factor .)
+    ID              reduce using rule 74 (term -> factor .)
+    TRANSPOSITION   shift and go to state 96
+
+
+state 54
+
+    (75) factor -> FLOATNUM .
+
+    TRANSPOSITION   reduce using rule 75 (factor -> FLOATNUM .)
+    MUL             reduce using rule 75 (factor -> FLOATNUM .)
+    DIV             reduce using rule 75 (factor -> FLOATNUM .)
+    DOTMUL          reduce using rule 75 (factor -> FLOATNUM .)
+    DOTDIV          reduce using rule 75 (factor -> FLOATNUM .)
+    L               reduce using rule 75 (factor -> FLOATNUM .)
+    G               reduce using rule 75 (factor -> FLOATNUM .)
+    EQ              reduce using rule 75 (factor -> FLOATNUM .)
+    NEQ             reduce using rule 75 (factor -> FLOATNUM .)
+    GE              reduce using rule 75 (factor -> FLOATNUM .)
+    LE              reduce using rule 75 (factor -> FLOATNUM .)
+    ADD             reduce using rule 75 (factor -> FLOATNUM .)
+    SUB             reduce using rule 75 (factor -> FLOATNUM .)
+    DOTADD          reduce using rule 75 (factor -> FLOATNUM .)
+    DOTSUB          reduce using rule 75 (factor -> FLOATNUM .)
+    SEMICOLON       reduce using rule 75 (factor -> FLOATNUM .)
+    COMMA           reduce using rule 75 (factor -> FLOATNUM .)
+    ROUNDCLOSE      reduce using rule 75 (factor -> FLOATNUM .)
+    SQUARECLOSE     reduce using rule 75 (factor -> FLOATNUM .)
+    RANGE           reduce using rule 75 (factor -> FLOATNUM .)
+    error           reduce using rule 75 (factor -> FLOATNUM .)
+    CURLYOPEN       reduce using rule 75 (factor -> FLOATNUM .)
+    IF              reduce using rule 75 (factor -> FLOATNUM .)
+    WHILE           reduce using rule 75 (factor -> FLOATNUM .)
+    FOR             reduce using rule 75 (factor -> FLOATNUM .)
+    BREAK           reduce using rule 75 (factor -> FLOATNUM .)
+    CONTINUE        reduce using rule 75 (factor -> FLOATNUM .)
+    RETURN          reduce using rule 75 (factor -> FLOATNUM .)
+    PRINT           reduce using rule 75 (factor -> FLOATNUM .)
+    ZEROS           reduce using rule 75 (factor -> FLOATNUM .)
+    ONES            reduce using rule 75 (factor -> FLOATNUM .)
+    EYE             reduce using rule 75 (factor -> FLOATNUM .)
+    ID              reduce using rule 75 (factor -> FLOATNUM .)
+
+
+state 55
+
+    (76) factor -> INTNUM .
+
+    TRANSPOSITION   reduce using rule 76 (factor -> INTNUM .)
+    MUL             reduce using rule 76 (factor -> INTNUM .)
+    DIV             reduce using rule 76 (factor -> INTNUM .)
+    DOTMUL          reduce using rule 76 (factor -> INTNUM .)
+    DOTDIV          reduce using rule 76 (factor -> INTNUM .)
+    L               reduce using rule 76 (factor -> INTNUM .)
+    G               reduce using rule 76 (factor -> INTNUM .)
+    EQ              reduce using rule 76 (factor -> INTNUM .)
+    NEQ             reduce using rule 76 (factor -> INTNUM .)
+    GE              reduce using rule 76 (factor -> INTNUM .)
+    LE              reduce using rule 76 (factor -> INTNUM .)
+    ADD             reduce using rule 76 (factor -> INTNUM .)
+    SUB             reduce using rule 76 (factor -> INTNUM .)
+    DOTADD          reduce using rule 76 (factor -> INTNUM .)
+    DOTSUB          reduce using rule 76 (factor -> INTNUM .)
+    SEMICOLON       reduce using rule 76 (factor -> INTNUM .)
+    COMMA           reduce using rule 76 (factor -> INTNUM .)
+    ROUNDCLOSE      reduce using rule 76 (factor -> INTNUM .)
+    SQUARECLOSE     reduce using rule 76 (factor -> INTNUM .)
+    RANGE           reduce using rule 76 (factor -> INTNUM .)
+    error           reduce using rule 76 (factor -> INTNUM .)
+    CURLYOPEN       reduce using rule 76 (factor -> INTNUM .)
+    IF              reduce using rule 76 (factor -> INTNUM .)
+    WHILE           reduce using rule 76 (factor -> INTNUM .)
+    FOR             reduce using rule 76 (factor -> INTNUM .)
+    BREAK           reduce using rule 76 (factor -> INTNUM .)
+    CONTINUE        reduce using rule 76 (factor -> INTNUM .)
+    RETURN          reduce using rule 76 (factor -> INTNUM .)
+    PRINT           reduce using rule 76 (factor -> INTNUM .)
+    ZEROS           reduce using rule 76 (factor -> INTNUM .)
+    ONES            reduce using rule 76 (factor -> INTNUM .)
+    EYE             reduce using rule 76 (factor -> INTNUM .)
+    ID              reduce using rule 76 (factor -> INTNUM .)
+
+
+state 56
+
+    (77) factor -> var .
+
+    TRANSPOSITION   reduce using rule 77 (factor -> var .)
+    MUL             reduce using rule 77 (factor -> var .)
+    DIV             reduce using rule 77 (factor -> var .)
+    DOTMUL          reduce using rule 77 (factor -> var .)
+    DOTDIV          reduce using rule 77 (factor -> var .)
+    L               reduce using rule 77 (factor -> var .)
+    G               reduce using rule 77 (factor -> var .)
+    EQ              reduce using rule 77 (factor -> var .)
+    NEQ             reduce using rule 77 (factor -> var .)
+    GE              reduce using rule 77 (factor -> var .)
+    LE              reduce using rule 77 (factor -> var .)
+    ADD             reduce using rule 77 (factor -> var .)
+    SUB             reduce using rule 77 (factor -> var .)
+    DOTADD          reduce using rule 77 (factor -> var .)
+    DOTSUB          reduce using rule 77 (factor -> var .)
+    SEMICOLON       reduce using rule 77 (factor -> var .)
+    COMMA           reduce using rule 77 (factor -> var .)
+    ROUNDCLOSE      reduce using rule 77 (factor -> var .)
+    SQUARECLOSE     reduce using rule 77 (factor -> var .)
+    RANGE           reduce using rule 77 (factor -> var .)
+    error           reduce using rule 77 (factor -> var .)
+    CURLYOPEN       reduce using rule 77 (factor -> var .)
+    IF              reduce using rule 77 (factor -> var .)
+    WHILE           reduce using rule 77 (factor -> var .)
+    FOR             reduce using rule 77 (factor -> var .)
+    BREAK           reduce using rule 77 (factor -> var .)
+    CONTINUE        reduce using rule 77 (factor -> var .)
+    RETURN          reduce using rule 77 (factor -> var .)
+    PRINT           reduce using rule 77 (factor -> var .)
+    ZEROS           reduce using rule 77 (factor -> var .)
+    ONES            reduce using rule 77 (factor -> var .)
+    EYE             reduce using rule 77 (factor -> var .)
+    ID              reduce using rule 77 (factor -> var .)
+
+
+state 57
+
+    (79) factor -> unary_operator .
+
+    TRANSPOSITION   reduce using rule 79 (factor -> unary_operator .)
+    MUL             reduce using rule 79 (factor -> unary_operator .)
+    DIV             reduce using rule 79 (factor -> unary_operator .)
+    DOTMUL          reduce using rule 79 (factor -> unary_operator .)
+    DOTDIV          reduce using rule 79 (factor -> unary_operator .)
+    L               reduce using rule 79 (factor -> unary_operator .)
+    G               reduce using rule 79 (factor -> unary_operator .)
+    EQ              reduce using rule 79 (factor -> unary_operator .)
+    NEQ             reduce using rule 79 (factor -> unary_operator .)
+    GE              reduce using rule 79 (factor -> unary_operator .)
+    LE              reduce using rule 79 (factor -> unary_operator .)
+    ADD             reduce using rule 79 (factor -> unary_operator .)
+    SUB             reduce using rule 79 (factor -> unary_operator .)
+    DOTADD          reduce using rule 79 (factor -> unary_operator .)
+    DOTSUB          reduce using rule 79 (factor -> unary_operator .)
+    SEMICOLON       reduce using rule 79 (factor -> unary_operator .)
+    COMMA           reduce using rule 79 (factor -> unary_operator .)
+    ROUNDCLOSE      reduce using rule 79 (factor -> unary_operator .)
+    SQUARECLOSE     reduce using rule 79 (factor -> unary_operator .)
+    RANGE           reduce using rule 79 (factor -> unary_operator .)
+    error           reduce using rule 79 (factor -> unary_operator .)
+    CURLYOPEN       reduce using rule 79 (factor -> unary_operator .)
+    IF              reduce using rule 79 (factor -> unary_operator .)
+    WHILE           reduce using rule 79 (factor -> unary_operator .)
+    FOR             reduce using rule 79 (factor -> unary_operator .)
+    BREAK           reduce using rule 79 (factor -> unary_operator .)
+    CONTINUE        reduce using rule 79 (factor -> unary_operator .)
+    RETURN          reduce using rule 79 (factor -> unary_operator .)
+    PRINT           reduce using rule 79 (factor -> unary_operator .)
+    ZEROS           reduce using rule 79 (factor -> unary_operator .)
+    ONES            reduce using rule 79 (factor -> unary_operator .)
+    EYE             reduce using rule 79 (factor -> unary_operator .)
+    ID              reduce using rule 79 (factor -> unary_operator .)
+
+
+state 58
+
+    (80) unary_operator -> negation .
+
+    TRANSPOSITION   reduce using rule 80 (unary_operator -> negation .)
+    MUL             reduce using rule 80 (unary_operator -> negation .)
+    DIV             reduce using rule 80 (unary_operator -> negation .)
+    DOTMUL          reduce using rule 80 (unary_operator -> negation .)
+    DOTDIV          reduce using rule 80 (unary_operator -> negation .)
+    L               reduce using rule 80 (unary_operator -> negation .)
+    G               reduce using rule 80 (unary_operator -> negation .)
+    EQ              reduce using rule 80 (unary_operator -> negation .)
+    NEQ             reduce using rule 80 (unary_operator -> negation .)
+    GE              reduce using rule 80 (unary_operator -> negation .)
+    LE              reduce using rule 80 (unary_operator -> negation .)
+    ADD             reduce using rule 80 (unary_operator -> negation .)
+    SUB             reduce using rule 80 (unary_operator -> negation .)
+    DOTADD          reduce using rule 80 (unary_operator -> negation .)
+    DOTSUB          reduce using rule 80 (unary_operator -> negation .)
+    SEMICOLON       reduce using rule 80 (unary_operator -> negation .)
+    COMMA           reduce using rule 80 (unary_operator -> negation .)
+    ROUNDCLOSE      reduce using rule 80 (unary_operator -> negation .)
+    SQUARECLOSE     reduce using rule 80 (unary_operator -> negation .)
+    RANGE           reduce using rule 80 (unary_operator -> negation .)
+    error           reduce using rule 80 (unary_operator -> negation .)
+    CURLYOPEN       reduce using rule 80 (unary_operator -> negation .)
+    IF              reduce using rule 80 (unary_operator -> negation .)
+    WHILE           reduce using rule 80 (unary_operator -> negation .)
+    FOR             reduce using rule 80 (unary_operator -> negation .)
+    BREAK           reduce using rule 80 (unary_operator -> negation .)
+    CONTINUE        reduce using rule 80 (unary_operator -> negation .)
+    RETURN          reduce using rule 80 (unary_operator -> negation .)
+    PRINT           reduce using rule 80 (unary_operator -> negation .)
+    ZEROS           reduce using rule 80 (unary_operator -> negation .)
+    ONES            reduce using rule 80 (unary_operator -> negation .)
+    EYE             reduce using rule 80 (unary_operator -> negation .)
+    ID              reduce using rule 80 (unary_operator -> negation .)
+
+
+state 59
+
+    (81) unary_operator -> transposition .
+
+    TRANSPOSITION   reduce using rule 81 (unary_operator -> transposition .)
+    MUL             reduce using rule 81 (unary_operator -> transposition .)
+    DIV             reduce using rule 81 (unary_operator -> transposition .)
+    DOTMUL          reduce using rule 81 (unary_operator -> transposition .)
+    DOTDIV          reduce using rule 81 (unary_operator -> transposition .)
+    L               reduce using rule 81 (unary_operator -> transposition .)
+    G               reduce using rule 81 (unary_operator -> transposition .)
+    EQ              reduce using rule 81 (unary_operator -> transposition .)
+    NEQ             reduce using rule 81 (unary_operator -> transposition .)
+    GE              reduce using rule 81 (unary_operator -> transposition .)
+    LE              reduce using rule 81 (unary_operator -> transposition .)
+    ADD             reduce using rule 81 (unary_operator -> transposition .)
+    SUB             reduce using rule 81 (unary_operator -> transposition .)
+    DOTADD          reduce using rule 81 (unary_operator -> transposition .)
+    DOTSUB          reduce using rule 81 (unary_operator -> transposition .)
+    SEMICOLON       reduce using rule 81 (unary_operator -> transposition .)
+    COMMA           reduce using rule 81 (unary_operator -> transposition .)
+    ROUNDCLOSE      reduce using rule 81 (unary_operator -> transposition .)
+    SQUARECLOSE     reduce using rule 81 (unary_operator -> transposition .)
+    RANGE           reduce using rule 81 (unary_operator -> transposition .)
+    error           reduce using rule 81 (unary_operator -> transposition .)
+    CURLYOPEN       reduce using rule 81 (unary_operator -> transposition .)
+    IF              reduce using rule 81 (unary_operator -> transposition .)
+    WHILE           reduce using rule 81 (unary_operator -> transposition .)
+    FOR             reduce using rule 81 (unary_operator -> transposition .)
+    BREAK           reduce using rule 81 (unary_operator -> transposition .)
+    CONTINUE        reduce using rule 81 (unary_operator -> transposition .)
+    RETURN          reduce using rule 81 (unary_operator -> transposition .)
+    PRINT           reduce using rule 81 (unary_operator -> transposition .)
+    ZEROS           reduce using rule 81 (unary_operator -> transposition .)
+    ONES            reduce using rule 81 (unary_operator -> transposition .)
+    EYE             reduce using rule 81 (unary_operator -> transposition .)
+    ID              reduce using rule 81 (unary_operator -> transposition .)
+
+
+state 60
+
+    (17) print -> PRINT print_body .
+
+    SEMICOLON       reduce using rule 17 (print -> PRINT print_body .)
+
+
+state 61
+
+    (18) print_body -> string .
+    (20) print_body -> string . COMMA print_body
+
+    SEMICOLON       reduce using rule 18 (print_body -> string .)
+    COMMA           shift and go to state 97
+
+
+state 62
+
+    (19) print_body -> expression .
+    (21) print_body -> expression . COMMA print_body
+
+    SEMICOLON       reduce using rule 19 (print_body -> expression .)
+    COMMA           shift and go to state 98
+
+
+state 63
+
+    (24) string -> STRING .
+
+    COMMA           reduce using rule 24 (string -> STRING .)
+    SEMICOLON       reduce using rule 24 (string -> STRING .)
+
+
+state 64
+
+    (15) block -> CURLYOPEN instructions CURLYCLOSE .
+
+    error           reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    CURLYOPEN       reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    IF              reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    WHILE           reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    FOR             reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    BREAK           reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    CONTINUE        reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    RETURN          reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    PRINT           reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    ZEROS           reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    ONES            reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    EYE             reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    ID              reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    $end            reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    CURLYCLOSE      reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+    ELSE            reduce using rule 15 (block -> CURLYOPEN instructions CURLYCLOSE .)
+
+
+state 65
+
+    (16) block -> CURLYOPEN error CURLYCLOSE .
+
+    error           reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    CURLYOPEN       reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    IF              reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    WHILE           reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    FOR             reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    BREAK           reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    CONTINUE        reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    RETURN          reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    PRINT           reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    ZEROS           reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    ONES            reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    EYE             reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    ID              reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    $end            reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    CURLYCLOSE      reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+    ELSE            reduce using rule 16 (block -> CURLYOPEN error CURLYCLOSE .)
+
+
+state 66
+
+    (25) conditional -> IF ROUNDOPEN expression . ROUNDCLOSE instruction
+    (26) conditional -> IF ROUNDOPEN expression . ROUNDCLOSE instruction ELSE instruction
+
+    ROUNDCLOSE      shift and go to state 99
+
+
+state 67
+
+    (29) while -> WHILE ROUNDOPEN expression . ROUNDCLOSE instruction
+
+    ROUNDCLOSE      shift and go to state 100
+
+
+state 68
+
+    (30) for -> FOR ID ASSIGN . numeric_expression RANGE numeric_expression instruction
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 101
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 69
+
+    (85) var -> ID SQUAREOPEN fun_body . SQUARECLOSE
+
+    SQUARECLOSE     shift and go to state 102
+
+
+state 70
+
+    (33) fun_body -> numeric_expression .
+    (34) fun_body -> numeric_expression . COMMA fun_body
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SQUARECLOSE     reduce using rule 33 (fun_body -> numeric_expression .)
+    ROUNDCLOSE      reduce using rule 33 (fun_body -> numeric_expression .)
+    COMMA           shift and go to state 103
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 71
+
+    (78) factor -> ROUNDOPEN . numeric_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 104
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 72
+
+    (38) assignment -> assignment_left_side assignment_operator expression .
+
+    SEMICOLON       reduce using rule 38 (assignment -> assignment_left_side assignment_operator expression .)
+
+
+state 73
+
+    (39) assignment -> assignment_left_side ASSIGN string .
+
+    SEMICOLON       reduce using rule 39 (assignment -> assignment_left_side ASSIGN string .)
+
+
+state 74
+
+    (40) assignment -> assignment_left_side ASSIGN matrix .
+
+    SEMICOLON       reduce using rule 40 (assignment -> assignment_left_side ASSIGN matrix .)
+
+
+state 75
+
+    (41) assignment -> assignment_left_side ASSIGN vector .
+
+    SEMICOLON       reduce using rule 41 (assignment -> assignment_left_side ASSIGN vector .)
+
+
+state 76
+
+    (48) matrix -> SQUAREOPEN . matrix_body SQUARECLOSE
+    (51) vector -> SQUAREOPEN . vector_body SQUARECLOSE
+    (52) vector -> SQUAREOPEN . SQUARECLOSE
+    (49) matrix_body -> . vector
+    (50) matrix_body -> . vector COMMA matrix_body
+    (53) vector_body -> . numeric_expression
+    (54) vector_body -> . numeric_expression COMMA vector_body
+    (51) vector -> . SQUAREOPEN vector_body SQUARECLOSE
+    (52) vector -> . SQUAREOPEN SQUARECLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    SQUARECLOSE     shift and go to state 107
+    SQUAREOPEN      shift and go to state 105
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    matrix_body                    shift and go to state 106
+    vector_body                    shift and go to state 108
+    vector                         shift and go to state 109
+    numeric_expression             shift and go to state 110
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 77
+
+    (31) fun -> fun_name ROUNDOPEN fun_body . ROUNDCLOSE
+
+    ROUNDCLOSE      shift and go to state 111
+
+
+state 78
+
+    (32) fun -> fun_name ROUNDOPEN error . ROUNDCLOSE
+
+    ROUNDCLOSE      shift and go to state 112
+
+
+state 79
+
+    (58) comparison_expression -> numeric_expression L . numeric_expression
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 113
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 80
+
+    (59) comparison_expression -> numeric_expression G . numeric_expression
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 114
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 81
+
+    (60) comparison_expression -> numeric_expression EQ . numeric_expression
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 115
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 82
+
+    (61) comparison_expression -> numeric_expression NEQ . numeric_expression
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 116
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 83
+
+    (62) comparison_expression -> numeric_expression GE . numeric_expression
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 117
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 84
+
+    (63) comparison_expression -> numeric_expression LE . numeric_expression
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 118
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 85
+
+    (65) numeric_expression -> numeric_expression ADD . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    term                           shift and go to state 119
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 86
+
+    (66) numeric_expression -> numeric_expression SUB . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    term                           shift and go to state 120
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 87
+
+    (67) numeric_expression -> numeric_expression DOTADD . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    term                           shift and go to state 121
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 88
+
+    (68) numeric_expression -> numeric_expression DOTSUB . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    term                           shift and go to state 122
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 89
+
+    (64) comparison_expression -> ROUNDOPEN comparison_expression . ROUNDCLOSE
+
+    ROUNDCLOSE      shift and go to state 123
+
+
+state 90
+
+    (78) factor -> ROUNDOPEN numeric_expression . ROUNDCLOSE
+    (58) comparison_expression -> numeric_expression . L numeric_expression
+    (59) comparison_expression -> numeric_expression . G numeric_expression
+    (60) comparison_expression -> numeric_expression . EQ numeric_expression
+    (61) comparison_expression -> numeric_expression . NEQ numeric_expression
+    (62) comparison_expression -> numeric_expression . GE numeric_expression
+    (63) comparison_expression -> numeric_expression . LE numeric_expression
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    ROUNDCLOSE      shift and go to state 124
+    L               shift and go to state 79
+    G               shift and go to state 80
+    EQ              shift and go to state 81
+    NEQ             shift and go to state 82
+    GE              shift and go to state 83
+    LE              shift and go to state 84
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 91
+
+    (70) term -> term MUL . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    factor                         shift and go to state 125
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 92
+
+    (71) term -> term DIV . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    factor                         shift and go to state 126
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 93
+
+    (72) term -> term DOTMUL . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    factor                         shift and go to state 127
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 94
+
+    (73) term -> term DOTDIV . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    factor                         shift and go to state 128
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 95
+
+    (82) negation -> SUB factor .
+    (83) transposition -> factor . TRANSPOSITION
+
+    MUL             reduce using rule 82 (negation -> SUB factor .)
+    DIV             reduce using rule 82 (negation -> SUB factor .)
+    DOTMUL          reduce using rule 82 (negation -> SUB factor .)
+    DOTDIV          reduce using rule 82 (negation -> SUB factor .)
+    L               reduce using rule 82 (negation -> SUB factor .)
+    G               reduce using rule 82 (negation -> SUB factor .)
+    EQ              reduce using rule 82 (negation -> SUB factor .)
+    NEQ             reduce using rule 82 (negation -> SUB factor .)
+    GE              reduce using rule 82 (negation -> SUB factor .)
+    LE              reduce using rule 82 (negation -> SUB factor .)
+    ADD             reduce using rule 82 (negation -> SUB factor .)
+    SUB             reduce using rule 82 (negation -> SUB factor .)
+    DOTADD          reduce using rule 82 (negation -> SUB factor .)
+    DOTSUB          reduce using rule 82 (negation -> SUB factor .)
+    SEMICOLON       reduce using rule 82 (negation -> SUB factor .)
+    COMMA           reduce using rule 82 (negation -> SUB factor .)
+    ROUNDCLOSE      reduce using rule 82 (negation -> SUB factor .)
+    SQUARECLOSE     reduce using rule 82 (negation -> SUB factor .)
+    RANGE           reduce using rule 82 (negation -> SUB factor .)
+    error           reduce using rule 82 (negation -> SUB factor .)
+    CURLYOPEN       reduce using rule 82 (negation -> SUB factor .)
+    IF              reduce using rule 82 (negation -> SUB factor .)
+    WHILE           reduce using rule 82 (negation -> SUB factor .)
+    FOR             reduce using rule 82 (negation -> SUB factor .)
+    BREAK           reduce using rule 82 (negation -> SUB factor .)
+    CONTINUE        reduce using rule 82 (negation -> SUB factor .)
+    RETURN          reduce using rule 82 (negation -> SUB factor .)
+    PRINT           reduce using rule 82 (negation -> SUB factor .)
+    ZEROS           reduce using rule 82 (negation -> SUB factor .)
+    ONES            reduce using rule 82 (negation -> SUB factor .)
+    EYE             reduce using rule 82 (negation -> SUB factor .)
+    ID              reduce using rule 82 (negation -> SUB factor .)
+    TRANSPOSITION   shift and go to state 96
+
+  ! TRANSPOSITION   [ reduce using rule 82 (negation -> SUB factor .) ]
+
+
+state 96
+
+    (83) transposition -> factor TRANSPOSITION .
+
+    TRANSPOSITION   reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    MUL             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    DIV             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    DOTMUL          reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    DOTDIV          reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    L               reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    G               reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    EQ              reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    NEQ             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    GE              reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    LE              reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    ADD             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    SUB             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    DOTADD          reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    DOTSUB          reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    SEMICOLON       reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    COMMA           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    ROUNDCLOSE      reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    SQUARECLOSE     reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    RANGE           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    error           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    CURLYOPEN       reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    IF              reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    WHILE           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    FOR             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    BREAK           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    CONTINUE        reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    RETURN          reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    PRINT           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    ZEROS           reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    ONES            reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    EYE             reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+    ID              reduce using rule 83 (transposition -> factor TRANSPOSITION .)
+
+
+state 97
+
+    (20) print_body -> string COMMA . print_body
+    (18) print_body -> . string
+    (19) print_body -> . expression
+    (20) print_body -> . string COMMA print_body
+    (21) print_body -> . expression COMMA print_body
+    (24) string -> . STRING
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    STRING          shift and go to state 63
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    string                         shift and go to state 61
+    print_body                     shift and go to state 129
+    expression                     shift and go to state 62
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 98
+
+    (21) print_body -> expression COMMA . print_body
+    (18) print_body -> . string
+    (19) print_body -> . expression
+    (20) print_body -> . string COMMA print_body
+    (21) print_body -> . expression COMMA print_body
+    (24) string -> . STRING
+    (55) expression -> . comparison_expression
+    (56) expression -> . numeric_expression
+    (57) expression -> . fun
+    (58) comparison_expression -> . numeric_expression L numeric_expression
+    (59) comparison_expression -> . numeric_expression G numeric_expression
+    (60) comparison_expression -> . numeric_expression EQ numeric_expression
+    (61) comparison_expression -> . numeric_expression NEQ numeric_expression
+    (62) comparison_expression -> . numeric_expression GE numeric_expression
+    (63) comparison_expression -> . numeric_expression LE numeric_expression
+    (64) comparison_expression -> . ROUNDOPEN comparison_expression ROUNDCLOSE
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    STRING          shift and go to state 63
+    ROUNDOPEN       shift and go to state 50
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    expression                     shift and go to state 62
+    print_body                     shift and go to state 130
+    string                         shift and go to state 61
+    comparison_expression          shift and go to state 47
+    numeric_expression             shift and go to state 48
+    fun                            shift and go to state 49
+    term                           shift and go to state 51
+    fun_name                       shift and go to state 23
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 99
+
+    (25) conditional -> IF ROUNDOPEN expression ROUNDCLOSE . instruction
+    (26) conditional -> IF ROUNDOPEN expression ROUNDCLOSE . instruction ELSE instruction
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    error           shift and go to state 7
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instruction                    shift and go to state 131
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 100
+
+    (29) while -> WHILE ROUNDOPEN expression ROUNDCLOSE . instruction
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    error           shift and go to state 7
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instruction                    shift and go to state 132
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 101
+
+    (30) for -> FOR ID ASSIGN numeric_expression . RANGE numeric_expression instruction
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    RANGE           shift and go to state 133
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 102
+
+    (85) var -> ID SQUAREOPEN fun_body SQUARECLOSE .
+
+    ASSIGN          reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    ADDASSIGN       reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    SUBASSIGN       reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    MULASSIGN       reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    DIVASSIGN       reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    TRANSPOSITION   reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    MUL             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    DIV             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    DOTMUL          reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    DOTDIV          reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    L               reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    G               reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    EQ              reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    NEQ             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    GE              reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    LE              reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    ADD             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    SUB             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    DOTADD          reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    DOTSUB          reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    SEMICOLON       reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    COMMA           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    ROUNDCLOSE      reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    SQUARECLOSE     reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    RANGE           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    error           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    CURLYOPEN       reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    IF              reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    WHILE           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    FOR             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    BREAK           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    CONTINUE        reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    RETURN          reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    PRINT           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    ZEROS           reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    ONES            reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    EYE             reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+    ID              reduce using rule 85 (var -> ID SQUAREOPEN fun_body SQUARECLOSE .)
+
+
+state 103
+
+    (34) fun_body -> numeric_expression COMMA . fun_body
+    (33) fun_body -> . numeric_expression
+    (34) fun_body -> . numeric_expression COMMA fun_body
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 70
+    fun_body                       shift and go to state 134
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 104
+
+    (78) factor -> ROUNDOPEN numeric_expression . ROUNDCLOSE
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    ROUNDCLOSE      shift and go to state 124
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 105
+
+    (51) vector -> SQUAREOPEN . vector_body SQUARECLOSE
+    (52) vector -> SQUAREOPEN . SQUARECLOSE
+    (53) vector_body -> . numeric_expression
+    (54) vector_body -> . numeric_expression COMMA vector_body
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    SQUARECLOSE     shift and go to state 107
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    vector_body                    shift and go to state 108
+    numeric_expression             shift and go to state 110
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 106
+
+    (48) matrix -> SQUAREOPEN matrix_body . SQUARECLOSE
+
+    SQUARECLOSE     shift and go to state 135
+
+
+state 107
+
+    (52) vector -> SQUAREOPEN SQUARECLOSE .
+
+    SEMICOLON       reduce using rule 52 (vector -> SQUAREOPEN SQUARECLOSE .)
+    COMMA           reduce using rule 52 (vector -> SQUAREOPEN SQUARECLOSE .)
+    SQUARECLOSE     reduce using rule 52 (vector -> SQUAREOPEN SQUARECLOSE .)
+
+
+state 108
+
+    (51) vector -> SQUAREOPEN vector_body . SQUARECLOSE
+
+    SQUARECLOSE     shift and go to state 136
+
+
+state 109
+
+    (49) matrix_body -> vector .
+    (50) matrix_body -> vector . COMMA matrix_body
+
+    SQUARECLOSE     reduce using rule 49 (matrix_body -> vector .)
+    COMMA           shift and go to state 137
+
+
+state 110
+
+    (53) vector_body -> numeric_expression .
+    (54) vector_body -> numeric_expression . COMMA vector_body
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SQUARECLOSE     reduce using rule 53 (vector_body -> numeric_expression .)
+    COMMA           shift and go to state 138
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 111
+
+    (31) fun -> fun_name ROUNDOPEN fun_body ROUNDCLOSE .
+
+    SEMICOLON       reduce using rule 31 (fun -> fun_name ROUNDOPEN fun_body ROUNDCLOSE .)
+    COMMA           reduce using rule 31 (fun -> fun_name ROUNDOPEN fun_body ROUNDCLOSE .)
+    ROUNDCLOSE      reduce using rule 31 (fun -> fun_name ROUNDOPEN fun_body ROUNDCLOSE .)
+
+
+state 112
+
+    (32) fun -> fun_name ROUNDOPEN error ROUNDCLOSE .
+
+    SEMICOLON       reduce using rule 32 (fun -> fun_name ROUNDOPEN error ROUNDCLOSE .)
+    COMMA           reduce using rule 32 (fun -> fun_name ROUNDOPEN error ROUNDCLOSE .)
+    ROUNDCLOSE      reduce using rule 32 (fun -> fun_name ROUNDOPEN error ROUNDCLOSE .)
+
+
+state 113
+
+    (58) comparison_expression -> numeric_expression L numeric_expression .
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 58 (comparison_expression -> numeric_expression L numeric_expression .)
+    COMMA           reduce using rule 58 (comparison_expression -> numeric_expression L numeric_expression .)
+    ROUNDCLOSE      reduce using rule 58 (comparison_expression -> numeric_expression L numeric_expression .)
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 114
+
+    (59) comparison_expression -> numeric_expression G numeric_expression .
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 59 (comparison_expression -> numeric_expression G numeric_expression .)
+    COMMA           reduce using rule 59 (comparison_expression -> numeric_expression G numeric_expression .)
+    ROUNDCLOSE      reduce using rule 59 (comparison_expression -> numeric_expression G numeric_expression .)
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 115
+
+    (60) comparison_expression -> numeric_expression EQ numeric_expression .
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 60 (comparison_expression -> numeric_expression EQ numeric_expression .)
+    COMMA           reduce using rule 60 (comparison_expression -> numeric_expression EQ numeric_expression .)
+    ROUNDCLOSE      reduce using rule 60 (comparison_expression -> numeric_expression EQ numeric_expression .)
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 116
+
+    (61) comparison_expression -> numeric_expression NEQ numeric_expression .
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 61 (comparison_expression -> numeric_expression NEQ numeric_expression .)
+    COMMA           reduce using rule 61 (comparison_expression -> numeric_expression NEQ numeric_expression .)
+    ROUNDCLOSE      reduce using rule 61 (comparison_expression -> numeric_expression NEQ numeric_expression .)
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 117
+
+    (62) comparison_expression -> numeric_expression GE numeric_expression .
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 62 (comparison_expression -> numeric_expression GE numeric_expression .)
+    COMMA           reduce using rule 62 (comparison_expression -> numeric_expression GE numeric_expression .)
+    ROUNDCLOSE      reduce using rule 62 (comparison_expression -> numeric_expression GE numeric_expression .)
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 118
+
+    (63) comparison_expression -> numeric_expression LE numeric_expression .
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+
+    SEMICOLON       reduce using rule 63 (comparison_expression -> numeric_expression LE numeric_expression .)
+    COMMA           reduce using rule 63 (comparison_expression -> numeric_expression LE numeric_expression .)
+    ROUNDCLOSE      reduce using rule 63 (comparison_expression -> numeric_expression LE numeric_expression .)
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+
+
+state 119
+
+    (65) numeric_expression -> numeric_expression ADD term .
+    (70) term -> term . MUL factor
+    (71) term -> term . DIV factor
+    (72) term -> term . DOTMUL factor
+    (73) term -> term . DOTDIV factor
+
+    L               reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    G               reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    EQ              reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    NEQ             reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    GE              reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    LE              reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    ADD             reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    SUB             reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    DOTADD          reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    DOTSUB          reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    SEMICOLON       reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    COMMA           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    ROUNDCLOSE      reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    SQUARECLOSE     reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    RANGE           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    error           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    CURLYOPEN       reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    IF              reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    WHILE           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    FOR             reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    BREAK           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    CONTINUE        reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    RETURN          reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    PRINT           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    ZEROS           reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    ONES            reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    EYE             reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    ID              reduce using rule 65 (numeric_expression -> numeric_expression ADD term .)
+    MUL             shift and go to state 91
+    DIV             shift and go to state 92
+    DOTMUL          shift and go to state 93
+    DOTDIV          shift and go to state 94
+
+
+state 120
+
+    (66) numeric_expression -> numeric_expression SUB term .
+    (70) term -> term . MUL factor
+    (71) term -> term . DIV factor
+    (72) term -> term . DOTMUL factor
+    (73) term -> term . DOTDIV factor
+
+    L               reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    G               reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    EQ              reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    NEQ             reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    GE              reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    LE              reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    ADD             reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    SUB             reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    DOTADD          reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    DOTSUB          reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    SEMICOLON       reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    COMMA           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    ROUNDCLOSE      reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    SQUARECLOSE     reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    RANGE           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    error           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    CURLYOPEN       reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    IF              reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    WHILE           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    FOR             reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    BREAK           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    CONTINUE        reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    RETURN          reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    PRINT           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    ZEROS           reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    ONES            reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    EYE             reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    ID              reduce using rule 66 (numeric_expression -> numeric_expression SUB term .)
+    MUL             shift and go to state 91
+    DIV             shift and go to state 92
+    DOTMUL          shift and go to state 93
+    DOTDIV          shift and go to state 94
+
+
+state 121
+
+    (67) numeric_expression -> numeric_expression DOTADD term .
+    (70) term -> term . MUL factor
+    (71) term -> term . DIV factor
+    (72) term -> term . DOTMUL factor
+    (73) term -> term . DOTDIV factor
+
+    L               reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    G               reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    EQ              reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    NEQ             reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    GE              reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    LE              reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    ADD             reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    SUB             reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    DOTADD          reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    DOTSUB          reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    SEMICOLON       reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    COMMA           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    ROUNDCLOSE      reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    SQUARECLOSE     reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    RANGE           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    error           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    CURLYOPEN       reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    IF              reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    WHILE           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    FOR             reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    BREAK           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    CONTINUE        reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    RETURN          reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    PRINT           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    ZEROS           reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    ONES            reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    EYE             reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    ID              reduce using rule 67 (numeric_expression -> numeric_expression DOTADD term .)
+    MUL             shift and go to state 91
+    DIV             shift and go to state 92
+    DOTMUL          shift and go to state 93
+    DOTDIV          shift and go to state 94
+
+
+state 122
+
+    (68) numeric_expression -> numeric_expression DOTSUB term .
+    (70) term -> term . MUL factor
+    (71) term -> term . DIV factor
+    (72) term -> term . DOTMUL factor
+    (73) term -> term . DOTDIV factor
+
+    L               reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    G               reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    EQ              reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    NEQ             reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    GE              reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    LE              reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    ADD             reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    SUB             reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    DOTADD          reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    DOTSUB          reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    SEMICOLON       reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    COMMA           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    ROUNDCLOSE      reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    SQUARECLOSE     reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    RANGE           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    error           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    CURLYOPEN       reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    IF              reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    WHILE           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    FOR             reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    BREAK           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    CONTINUE        reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    RETURN          reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    PRINT           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    ZEROS           reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    ONES            reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    EYE             reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    ID              reduce using rule 68 (numeric_expression -> numeric_expression DOTSUB term .)
+    MUL             shift and go to state 91
+    DIV             shift and go to state 92
+    DOTMUL          shift and go to state 93
+    DOTDIV          shift and go to state 94
+
+
+state 123
+
+    (64) comparison_expression -> ROUNDOPEN comparison_expression ROUNDCLOSE .
+
+    SEMICOLON       reduce using rule 64 (comparison_expression -> ROUNDOPEN comparison_expression ROUNDCLOSE .)
+    COMMA           reduce using rule 64 (comparison_expression -> ROUNDOPEN comparison_expression ROUNDCLOSE .)
+    ROUNDCLOSE      reduce using rule 64 (comparison_expression -> ROUNDOPEN comparison_expression ROUNDCLOSE .)
+
+
+state 124
+
+    (78) factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .
+
+    TRANSPOSITION   reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    MUL             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    DIV             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    DOTMUL          reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    DOTDIV          reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    L               reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    G               reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    EQ              reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    NEQ             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    GE              reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    LE              reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    ADD             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    SUB             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    DOTADD          reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    DOTSUB          reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    SEMICOLON       reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    COMMA           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    ROUNDCLOSE      reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    SQUARECLOSE     reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    RANGE           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    error           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    CURLYOPEN       reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    IF              reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    WHILE           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    FOR             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    BREAK           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    CONTINUE        reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    RETURN          reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    PRINT           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    ZEROS           reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    ONES            reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    EYE             reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+    ID              reduce using rule 78 (factor -> ROUNDOPEN numeric_expression ROUNDCLOSE .)
+
+
+state 125
+
+    (70) term -> term MUL factor .
+    (83) transposition -> factor . TRANSPOSITION
+
+    MUL             reduce using rule 70 (term -> term MUL factor .)
+    DIV             reduce using rule 70 (term -> term MUL factor .)
+    DOTMUL          reduce using rule 70 (term -> term MUL factor .)
+    DOTDIV          reduce using rule 70 (term -> term MUL factor .)
+    L               reduce using rule 70 (term -> term MUL factor .)
+    G               reduce using rule 70 (term -> term MUL factor .)
+    EQ              reduce using rule 70 (term -> term MUL factor .)
+    NEQ             reduce using rule 70 (term -> term MUL factor .)
+    GE              reduce using rule 70 (term -> term MUL factor .)
+    LE              reduce using rule 70 (term -> term MUL factor .)
+    ADD             reduce using rule 70 (term -> term MUL factor .)
+    SUB             reduce using rule 70 (term -> term MUL factor .)
+    DOTADD          reduce using rule 70 (term -> term MUL factor .)
+    DOTSUB          reduce using rule 70 (term -> term MUL factor .)
+    SEMICOLON       reduce using rule 70 (term -> term MUL factor .)
+    COMMA           reduce using rule 70 (term -> term MUL factor .)
+    ROUNDCLOSE      reduce using rule 70 (term -> term MUL factor .)
+    SQUARECLOSE     reduce using rule 70 (term -> term MUL factor .)
+    RANGE           reduce using rule 70 (term -> term MUL factor .)
+    error           reduce using rule 70 (term -> term MUL factor .)
+    CURLYOPEN       reduce using rule 70 (term -> term MUL factor .)
+    IF              reduce using rule 70 (term -> term MUL factor .)
+    WHILE           reduce using rule 70 (term -> term MUL factor .)
+    FOR             reduce using rule 70 (term -> term MUL factor .)
+    BREAK           reduce using rule 70 (term -> term MUL factor .)
+    CONTINUE        reduce using rule 70 (term -> term MUL factor .)
+    RETURN          reduce using rule 70 (term -> term MUL factor .)
+    PRINT           reduce using rule 70 (term -> term MUL factor .)
+    ZEROS           reduce using rule 70 (term -> term MUL factor .)
+    ONES            reduce using rule 70 (term -> term MUL factor .)
+    EYE             reduce using rule 70 (term -> term MUL factor .)
+    ID              reduce using rule 70 (term -> term MUL factor .)
+    TRANSPOSITION   shift and go to state 96
+
+
+state 126
+
+    (71) term -> term DIV factor .
+    (83) transposition -> factor . TRANSPOSITION
+
+    MUL             reduce using rule 71 (term -> term DIV factor .)
+    DIV             reduce using rule 71 (term -> term DIV factor .)
+    DOTMUL          reduce using rule 71 (term -> term DIV factor .)
+    DOTDIV          reduce using rule 71 (term -> term DIV factor .)
+    L               reduce using rule 71 (term -> term DIV factor .)
+    G               reduce using rule 71 (term -> term DIV factor .)
+    EQ              reduce using rule 71 (term -> term DIV factor .)
+    NEQ             reduce using rule 71 (term -> term DIV factor .)
+    GE              reduce using rule 71 (term -> term DIV factor .)
+    LE              reduce using rule 71 (term -> term DIV factor .)
+    ADD             reduce using rule 71 (term -> term DIV factor .)
+    SUB             reduce using rule 71 (term -> term DIV factor .)
+    DOTADD          reduce using rule 71 (term -> term DIV factor .)
+    DOTSUB          reduce using rule 71 (term -> term DIV factor .)
+    SEMICOLON       reduce using rule 71 (term -> term DIV factor .)
+    COMMA           reduce using rule 71 (term -> term DIV factor .)
+    ROUNDCLOSE      reduce using rule 71 (term -> term DIV factor .)
+    SQUARECLOSE     reduce using rule 71 (term -> term DIV factor .)
+    RANGE           reduce using rule 71 (term -> term DIV factor .)
+    error           reduce using rule 71 (term -> term DIV factor .)
+    CURLYOPEN       reduce using rule 71 (term -> term DIV factor .)
+    IF              reduce using rule 71 (term -> term DIV factor .)
+    WHILE           reduce using rule 71 (term -> term DIV factor .)
+    FOR             reduce using rule 71 (term -> term DIV factor .)
+    BREAK           reduce using rule 71 (term -> term DIV factor .)
+    CONTINUE        reduce using rule 71 (term -> term DIV factor .)
+    RETURN          reduce using rule 71 (term -> term DIV factor .)
+    PRINT           reduce using rule 71 (term -> term DIV factor .)
+    ZEROS           reduce using rule 71 (term -> term DIV factor .)
+    ONES            reduce using rule 71 (term -> term DIV factor .)
+    EYE             reduce using rule 71 (term -> term DIV factor .)
+    ID              reduce using rule 71 (term -> term DIV factor .)
+    TRANSPOSITION   shift and go to state 96
+
+
+state 127
+
+    (72) term -> term DOTMUL factor .
+    (83) transposition -> factor . TRANSPOSITION
+
+    MUL             reduce using rule 72 (term -> term DOTMUL factor .)
+    DIV             reduce using rule 72 (term -> term DOTMUL factor .)
+    DOTMUL          reduce using rule 72 (term -> term DOTMUL factor .)
+    DOTDIV          reduce using rule 72 (term -> term DOTMUL factor .)
+    L               reduce using rule 72 (term -> term DOTMUL factor .)
+    G               reduce using rule 72 (term -> term DOTMUL factor .)
+    EQ              reduce using rule 72 (term -> term DOTMUL factor .)
+    NEQ             reduce using rule 72 (term -> term DOTMUL factor .)
+    GE              reduce using rule 72 (term -> term DOTMUL factor .)
+    LE              reduce using rule 72 (term -> term DOTMUL factor .)
+    ADD             reduce using rule 72 (term -> term DOTMUL factor .)
+    SUB             reduce using rule 72 (term -> term DOTMUL factor .)
+    DOTADD          reduce using rule 72 (term -> term DOTMUL factor .)
+    DOTSUB          reduce using rule 72 (term -> term DOTMUL factor .)
+    SEMICOLON       reduce using rule 72 (term -> term DOTMUL factor .)
+    COMMA           reduce using rule 72 (term -> term DOTMUL factor .)
+    ROUNDCLOSE      reduce using rule 72 (term -> term DOTMUL factor .)
+    SQUARECLOSE     reduce using rule 72 (term -> term DOTMUL factor .)
+    RANGE           reduce using rule 72 (term -> term DOTMUL factor .)
+    error           reduce using rule 72 (term -> term DOTMUL factor .)
+    CURLYOPEN       reduce using rule 72 (term -> term DOTMUL factor .)
+    IF              reduce using rule 72 (term -> term DOTMUL factor .)
+    WHILE           reduce using rule 72 (term -> term DOTMUL factor .)
+    FOR             reduce using rule 72 (term -> term DOTMUL factor .)
+    BREAK           reduce using rule 72 (term -> term DOTMUL factor .)
+    CONTINUE        reduce using rule 72 (term -> term DOTMUL factor .)
+    RETURN          reduce using rule 72 (term -> term DOTMUL factor .)
+    PRINT           reduce using rule 72 (term -> term DOTMUL factor .)
+    ZEROS           reduce using rule 72 (term -> term DOTMUL factor .)
+    ONES            reduce using rule 72 (term -> term DOTMUL factor .)
+    EYE             reduce using rule 72 (term -> term DOTMUL factor .)
+    ID              reduce using rule 72 (term -> term DOTMUL factor .)
+    TRANSPOSITION   shift and go to state 96
+
+
+state 128
+
+    (73) term -> term DOTDIV factor .
+    (83) transposition -> factor . TRANSPOSITION
+
+    MUL             reduce using rule 73 (term -> term DOTDIV factor .)
+    DIV             reduce using rule 73 (term -> term DOTDIV factor .)
+    DOTMUL          reduce using rule 73 (term -> term DOTDIV factor .)
+    DOTDIV          reduce using rule 73 (term -> term DOTDIV factor .)
+    L               reduce using rule 73 (term -> term DOTDIV factor .)
+    G               reduce using rule 73 (term -> term DOTDIV factor .)
+    EQ              reduce using rule 73 (term -> term DOTDIV factor .)
+    NEQ             reduce using rule 73 (term -> term DOTDIV factor .)
+    GE              reduce using rule 73 (term -> term DOTDIV factor .)
+    LE              reduce using rule 73 (term -> term DOTDIV factor .)
+    ADD             reduce using rule 73 (term -> term DOTDIV factor .)
+    SUB             reduce using rule 73 (term -> term DOTDIV factor .)
+    DOTADD          reduce using rule 73 (term -> term DOTDIV factor .)
+    DOTSUB          reduce using rule 73 (term -> term DOTDIV factor .)
+    SEMICOLON       reduce using rule 73 (term -> term DOTDIV factor .)
+    COMMA           reduce using rule 73 (term -> term DOTDIV factor .)
+    ROUNDCLOSE      reduce using rule 73 (term -> term DOTDIV factor .)
+    SQUARECLOSE     reduce using rule 73 (term -> term DOTDIV factor .)
+    RANGE           reduce using rule 73 (term -> term DOTDIV factor .)
+    error           reduce using rule 73 (term -> term DOTDIV factor .)
+    CURLYOPEN       reduce using rule 73 (term -> term DOTDIV factor .)
+    IF              reduce using rule 73 (term -> term DOTDIV factor .)
+    WHILE           reduce using rule 73 (term -> term DOTDIV factor .)
+    FOR             reduce using rule 73 (term -> term DOTDIV factor .)
+    BREAK           reduce using rule 73 (term -> term DOTDIV factor .)
+    CONTINUE        reduce using rule 73 (term -> term DOTDIV factor .)
+    RETURN          reduce using rule 73 (term -> term DOTDIV factor .)
+    PRINT           reduce using rule 73 (term -> term DOTDIV factor .)
+    ZEROS           reduce using rule 73 (term -> term DOTDIV factor .)
+    ONES            reduce using rule 73 (term -> term DOTDIV factor .)
+    EYE             reduce using rule 73 (term -> term DOTDIV factor .)
+    ID              reduce using rule 73 (term -> term DOTDIV factor .)
+    TRANSPOSITION   shift and go to state 96
+
+
+state 129
+
+    (20) print_body -> string COMMA print_body .
+
+    SEMICOLON       reduce using rule 20 (print_body -> string COMMA print_body .)
+
+
+state 130
+
+    (21) print_body -> expression COMMA print_body .
+
+    SEMICOLON       reduce using rule 21 (print_body -> expression COMMA print_body .)
+
+
+state 131
+
+    (25) conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .
+    (26) conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction . ELSE instruction
+
+    error           reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    CURLYOPEN       reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    IF              reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    WHILE           reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    FOR             reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    BREAK           reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    CONTINUE        reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    RETURN          reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    PRINT           reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ZEROS           reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ONES            reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    EYE             reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ID              reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    $end            reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    CURLYCLOSE      reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ELSE            shift and go to state 139
+
+  ! ELSE            [ reduce using rule 25 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction .) ]
+
+
+state 132
+
+    (29) while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .
+
+    error           reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    CURLYOPEN       reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    IF              reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    WHILE           reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    FOR             reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    BREAK           reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    CONTINUE        reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    RETURN          reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    PRINT           reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ZEROS           reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ONES            reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    EYE             reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ID              reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    $end            reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    CURLYCLOSE      reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+    ELSE            reduce using rule 29 (while -> WHILE ROUNDOPEN expression ROUNDCLOSE instruction .)
+
+
+state 133
+
+    (30) for -> FOR ID ASSIGN numeric_expression RANGE . numeric_expression instruction
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 140
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 134
+
+    (34) fun_body -> numeric_expression COMMA fun_body .
+
+    SQUARECLOSE     reduce using rule 34 (fun_body -> numeric_expression COMMA fun_body .)
+    ROUNDCLOSE      reduce using rule 34 (fun_body -> numeric_expression COMMA fun_body .)
+
+
+state 135
+
+    (48) matrix -> SQUAREOPEN matrix_body SQUARECLOSE .
+
+    SEMICOLON       reduce using rule 48 (matrix -> SQUAREOPEN matrix_body SQUARECLOSE .)
+
+
+state 136
+
+    (51) vector -> SQUAREOPEN vector_body SQUARECLOSE .
+
+    SEMICOLON       reduce using rule 51 (vector -> SQUAREOPEN vector_body SQUARECLOSE .)
+    COMMA           reduce using rule 51 (vector -> SQUAREOPEN vector_body SQUARECLOSE .)
+    SQUARECLOSE     reduce using rule 51 (vector -> SQUAREOPEN vector_body SQUARECLOSE .)
+
+
+state 137
+
+    (50) matrix_body -> vector COMMA . matrix_body
+    (49) matrix_body -> . vector
+    (50) matrix_body -> . vector COMMA matrix_body
+    (51) vector -> . SQUAREOPEN vector_body SQUARECLOSE
+    (52) vector -> . SQUAREOPEN SQUARECLOSE
+
+    SQUAREOPEN      shift and go to state 105
+
+    vector                         shift and go to state 109
+    matrix_body                    shift and go to state 141
+
+state 138
+
+    (54) vector_body -> numeric_expression COMMA . vector_body
+    (53) vector_body -> . numeric_expression
+    (54) vector_body -> . numeric_expression COMMA vector_body
+    (65) numeric_expression -> . numeric_expression ADD term
+    (66) numeric_expression -> . numeric_expression SUB term
+    (67) numeric_expression -> . numeric_expression DOTADD term
+    (68) numeric_expression -> . numeric_expression DOTSUB term
+    (69) numeric_expression -> . term
+    (70) term -> . term MUL factor
+    (71) term -> . term DIV factor
+    (72) term -> . term DOTMUL factor
+    (73) term -> . term DOTDIV factor
+    (74) term -> . factor
+    (75) factor -> . FLOATNUM
+    (76) factor -> . INTNUM
+    (77) factor -> . var
+    (78) factor -> . ROUNDOPEN numeric_expression ROUNDCLOSE
+    (79) factor -> . unary_operator
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+    (80) unary_operator -> . negation
+    (81) unary_operator -> . transposition
+    (82) negation -> . SUB factor
+    (83) transposition -> . factor TRANSPOSITION
+
+    FLOATNUM        shift and go to state 54
+    INTNUM          shift and go to state 55
+    ROUNDOPEN       shift and go to state 71
+    ID              shift and go to state 19
+    SUB             shift and go to state 52
+
+    numeric_expression             shift and go to state 110
+    vector_body                    shift and go to state 142
+    term                           shift and go to state 51
+    factor                         shift and go to state 53
+    var                            shift and go to state 56
+    unary_operator                 shift and go to state 57
+    negation                       shift and go to state 58
+    transposition                  shift and go to state 59
+
+state 139
+
+    (26) conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE . instruction
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    error           shift and go to state 7
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instruction                    shift and go to state 143
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 140
+
+    (30) for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression . instruction
+    (65) numeric_expression -> numeric_expression . ADD term
+    (66) numeric_expression -> numeric_expression . SUB term
+    (67) numeric_expression -> numeric_expression . DOTADD term
+    (68) numeric_expression -> numeric_expression . DOTSUB term
+    (3) instruction -> . block
+    (4) instruction -> . conditional
+    (5) instruction -> . loop
+    (6) instruction -> . statement SEMICOLON
+    (7) instruction -> . error SEMICOLON
+    (15) block -> . CURLYOPEN instructions CURLYCLOSE
+    (16) block -> . CURLYOPEN error CURLYCLOSE
+    (25) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction
+    (26) conditional -> . IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction
+    (27) loop -> . while
+    (28) loop -> . for
+    (8) statement -> . assignment
+    (9) statement -> . flow_keyword
+    (10) statement -> . fun
+    (11) statement -> . return
+    (12) statement -> . print
+    (29) while -> . WHILE ROUNDOPEN expression ROUNDCLOSE instruction
+    (30) for -> . FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction
+    (38) assignment -> . assignment_left_side assignment_operator expression
+    (39) assignment -> . assignment_left_side ASSIGN string
+    (40) assignment -> . assignment_left_side ASSIGN matrix
+    (41) assignment -> . assignment_left_side ASSIGN vector
+    (13) flow_keyword -> . BREAK
+    (14) flow_keyword -> . CONTINUE
+    (31) fun -> . fun_name ROUNDOPEN fun_body ROUNDCLOSE
+    (32) fun -> . fun_name ROUNDOPEN error ROUNDCLOSE
+    (22) return -> . RETURN expression
+    (23) return -> . RETURN
+    (17) print -> . PRINT print_body
+    (42) assignment_left_side -> . var
+    (35) fun_name -> . ZEROS
+    (36) fun_name -> . ONES
+    (37) fun_name -> . EYE
+    (84) var -> . ID
+    (85) var -> . ID SQUAREOPEN fun_body SQUARECLOSE
+
+    ADD             shift and go to state 85
+    SUB             shift and go to state 86
+    DOTADD          shift and go to state 87
+    DOTSUB          shift and go to state 88
+    error           shift and go to state 7
+    CURLYOPEN       shift and go to state 8
+    IF              shift and go to state 9
+    WHILE           shift and go to state 17
+    FOR             shift and go to state 18
+    BREAK           shift and go to state 21
+    CONTINUE        shift and go to state 22
+    RETURN          shift and go to state 24
+    PRINT           shift and go to state 25
+    ZEROS           shift and go to state 27
+    ONES            shift and go to state 28
+    EYE             shift and go to state 29
+    ID              shift and go to state 19
+
+    instruction                    shift and go to state 144
+    block                          shift and go to state 3
+    conditional                    shift and go to state 4
+    loop                           shift and go to state 5
+    statement                      shift and go to state 6
+    while                          shift and go to state 10
+    for                            shift and go to state 11
+    assignment                     shift and go to state 12
+    flow_keyword                   shift and go to state 13
+    fun                            shift and go to state 14
+    return                         shift and go to state 15
+    print                          shift and go to state 16
+    assignment_left_side           shift and go to state 20
+    fun_name                       shift and go to state 23
+    var                            shift and go to state 26
+
+state 141
+
+    (50) matrix_body -> vector COMMA matrix_body .
+
+    SQUARECLOSE     reduce using rule 50 (matrix_body -> vector COMMA matrix_body .)
+
+
+state 142
+
+    (54) vector_body -> numeric_expression COMMA vector_body .
+
+    SQUARECLOSE     reduce using rule 54 (vector_body -> numeric_expression COMMA vector_body .)
+
+
+state 143
+
+    (26) conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .
+
+    error           reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    CURLYOPEN       reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    IF              reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    WHILE           reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    FOR             reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    BREAK           reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    CONTINUE        reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    RETURN          reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    PRINT           reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    ZEROS           reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    ONES            reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    EYE             reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    ID              reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    $end            reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    CURLYCLOSE      reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+    ELSE            reduce using rule 26 (conditional -> IF ROUNDOPEN expression ROUNDCLOSE instruction ELSE instruction .)
+
+
+state 144
+
+    (30) for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .
+
+    error           reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    CURLYOPEN       reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    IF              reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    WHILE           reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    FOR             reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    BREAK           reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    CONTINUE        reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    RETURN          reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    PRINT           reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    ZEROS           reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    ONES            reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    EYE             reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    ID              reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    $end            reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    CURLYCLOSE      reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+    ELSE            reduce using rule 30 (for -> FOR ID ASSIGN numeric_expression RANGE numeric_expression instruction .)
+

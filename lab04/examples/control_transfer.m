@@ -12,4 +12,3 @@ return x+1;
 return 2*x;
 
 print x;
-
