@@ -17,7 +17,6 @@ if __name__ == '__main__':
             3: "Lab05/Examples/pi.m",
             4: "Lab05/Examples/primes.m",
             5: "Lab05/Examples/sqrt.m",
-            6: "Lab05/Examples/triangle.m",  # !!
         }
         filename = sys.argv[1] if len(sys.argv) > 1 else examples[5]
         file = open(filename, "r")
