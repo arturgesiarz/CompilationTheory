@@ -20,12 +20,15 @@ class Instructions(Node):
 
         self.line_number = line_number
         self.children = [instruction]
+        
 
-
-class FlowKeyword(Node):
-    def __init__(self, value, line_number=None):
+class Continue(Node):
+    def __init__(self, line_number=None):
         self.line_number = line_number
-        self.value = value
+        
+class Break(Node):
+    def __init__(self, line_number=None):
+        self.line_number = line_number
 
 
 class For(Node):
@@ -43,8 +46,7 @@ class While(Node):
 
         self.expression = expression
         self.instruction = instruction
-
-
+        
 class Assignment(Node):
     def __init__(self, left_side, assignment, value, line_number=None):
         self.line_number = line_number
@@ -52,7 +54,6 @@ class Assignment(Node):
         self.left_side = left_side
         self.assignment = assignment
         self.value = value
-
 
 class Expression(Node):
     def __init__(self, left_side, operator, right_side, line_number=None):

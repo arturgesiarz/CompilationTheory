@@ -53,7 +53,10 @@ def p_statement(p):
 def p_flow_keyword(p):
     """flow_keyword : BREAK
                     | CONTINUE"""
-    p[0] = AST.FlowKeyword(p[1], line_number=lexer.lineno)
+    if p[1] == 'break':
+        p[0] = AST.Break(line_number=lexer.lineno)
+    if p[1] == 'continue':
+        p[0] = AST.Continue(line_number=lexer.lineno)
 
 def p_block(p):
     """block : CURLYOPEN instructions CURLYCLOSE

@@ -215,9 +215,13 @@ class TypeChecker(NodeVisitor):
         self.visit(node.instruction)
         nested_loops_number -= 1
 
-    def visit_FlowKeyword(self, node):
+    def visit_Break(self, node):
         if nested_loops_number == 0:
-            print(node.value + " outside loop in line {}".format(node.line_number))
+            print("Break outside loop in line {}".format(node.line_number))
+            
+    def visit_Continue(self, node):
+        if nested_loops_number == 0:
+            print("Continue outside loop in line {}".format(node.line_number))
 
     def visit_Return(self, node):
         expresion_result = self.visit(node.instruction)

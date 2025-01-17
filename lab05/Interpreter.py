@@ -27,29 +27,37 @@ class OperationManager:
             '<=': self.le
         }
 
+    # Funkcja do wykonywania operacji
     def calculate(self, left_side, operator, right_side):
         return self.operators[operator](left_side, right_side)
 
+    # Dodawanie
     def add(self, left_side, right_side):
         if isinstance(left_side, list):
             if len(left_side) > 0:
-                if isinstance(left_side[0], list):
+                if isinstance(left_side[0], list):  # sprawdzamy czy mamy do czynienia z macierza
+                    # dodawanie w macierzy za pomoca funkcji lambda
                     return list(map(lambda l: list(map(lambda x: x[0]+x[1], list(zip(l[0], l[1])))), list(zip(left_side, right_side))))
+                
+                # dodawanie w liscie za pomoca funkcji lambda
                 return list(map(lambda x: x[0]+x[1], list(zip(left_side, right_side))))
             return []
         return left_side + right_side
 
+    # Odejmowanie
     def sub(self, left_side, right_side):
         if isinstance(left_side, list):
             if len(left_side) > 0:
-                if isinstance(left_side[0], list):
-                    return list(map(lambda l: list(map(lambda x: x[0] - x[1], list(zip(l[0], l[1])))),
-                                    list(zip(left_side, right_side))))
-                    
+                if isinstance(left_side[0], list):  # sprawdzanie czy mamy do czynienia z macierza
+                    # odejmowanie w macierzy za pomoca funkcji lambda
+                    return list(map(lambda l: list(map(lambda x: x[0] - x[1], list(zip(l[0], l[1])))), list(zip(left_side, right_side))))
+                
+                # odejmowanie w liscie za pomoca funkji lmabda
                 return list(map(lambda x: x[0] - x[1], list(zip(left_side, right_side))))
             return []
         return left_side - right_side
 
+    # Mnożenie
     def mul(self, left_side, right_side):
         if isinstance(left_side, list):
             resultMatrix = [[0 for x in range(len(left_side))] for y in range(len(right_side[0]))]
@@ -61,9 +69,12 @@ class OperationManager:
         else:
             return left_side * right_side
 
+    # Dzielenie
     def div(self, left_side, right_side):
         return left_side / right_side
 
+
+    # Funkcja do operacji na macierzach
     def dotop(self, op, a, b):
         if isinstance(a, list) and not isinstance(b, list):
             if len(a) > 0:
@@ -71,16 +82,19 @@ class OperationManager:
                     return list(map(lambda l: list(map(lambda x: op(x, b), l)), a))
                 return list(map(lambda x: op(x, b), a))
             return []
+        
         elif not isinstance(a, list) and isinstance(b, list):
             if len(b) > 0:
                 if isinstance(b[0], list):
                     return list(map(lambda l: list(map(lambda x: op(x, a), l)), b))
                 return list(map(lambda x: op(x, a), b))
             return []
+        
         else:
             if len(a) == 0:
                 return [[]]
             res1 = copy.deepcopy(a)
+            
             if isinstance(a[0], list):
                 for i in range(len(a)):
                     for j in range(len(a[i])):

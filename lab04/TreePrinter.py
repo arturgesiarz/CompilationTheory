@@ -111,11 +111,13 @@ class TreePrinter:
         for val in self.fun_body:
             val.printTree(indent + 1)
 
-
-    @addToClass(AST.FlowKeyword)
+    @addToClass(AST.Break)
     def printTree(self, indent=0):
-        print("| " * indent + self.value)
-        # fill in the body
+        print("| " * indent + "BREAK")
+    
+    @addToClass(AST.Continue)
+    def printTree(self, indent=0):
+        print("| " * indent + "CONTINUE")
 
     @addToClass(AST.Expression)
     def printTree(self, indent=0):
