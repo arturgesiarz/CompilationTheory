@@ -35,6 +35,7 @@ class TypeChecker(NodeVisitor):
         symbol2 = self.visit(node.right_side)
         op = node.operator
 
+        # (usunac)
         if symbol1 is None or symbol2 is None:
             print('Can\'t execute operation with undeclared variables in line {}'.format(node.line_number))
             return None
@@ -88,13 +89,17 @@ class TypeChecker(NodeVisitor):
 
     def visit_Vector(self, node):
         types = []
+        
         for val in node.body:
             visited_val = self.visit(val)
             if not isinstance(visited_val, VariableSymbol):
                 print('Element of Vector is not a Variable in line {}'.format(node.line_number))
                 return None
+            
             types.append(visited_val.type)
+            
         new_type = vector_type(types)
+        
         if new_type:
             return VectorSymbol('', new_type, len(node.body))
         print('Conflicting types in Vector in line {}'.format(node.line_number))
@@ -127,19 +132,24 @@ class TypeChecker(NodeVisitor):
 
     def visit_Function(self, node):
         symbols = []
+        
         for arg in node.fun_body:
             symbols.append(self.visit(arg))
-
+            
+        # przerobic na liste [ones, zeros, eye]
         if node.fun_name == 'ones' or node.fun_name == 'zeros' or node.fun_name == 'eye':
             if len(symbols) > 2 or len(symbols) < 1:
-                print('Bad number of arguments for function {} in line {}'.format(node.fun_name, node.line_number))
+                print('Wrong number of arguments for function {} in line {}'.format(node.fun_name, node.line_number))
                 return None
+            
             for sym in symbols:
                 if sym.type != 'int':
-                    print('Bad argument for function {} in line {}'.format(node.fun_name, node.line_number))
+                    print('Wrong argument for function {} in line {}'.format(node.fun_name, node.line_number))
                     return None
+                
             if len(symbols) == 2:
                 return MatrixSymbol('', 'int', (node.fun_body[0].value, node.fun_body[1].value))
+            
             return MatrixSymbol('', 'int', (node.fun_body[0].value, node.fun_body[0].value))
 
         print('Function {} is not defined in line {}'.format(node.fun_name, node.line_number))
@@ -162,18 +172,21 @@ class TypeChecker(NodeVisitor):
         if var is None:
             return print("Variable undefined in line {}".format(node.line_number))
         if isinstance(var, MatrixSymbol):
-
             if len(node.fun_body) != 2:
                 return print("Invalid arguments number in line {}".format(node.line_number))
             if not 0 <= node.fun_body[0].value < var.size[0] or not 0 <= node.fun_body[1].value < var.size[1]:
                 return print("Out of range in line {0}".format(node.line_number))
             return VariableSymbol("Matrix", var.type)
+        
         if isinstance(var, VectorSymbol):
             if len(node.fun_body) != 1:
                 return print("Invalid arguments number in line {}".format(node.line_number))
+            
             if 0 > node.fun_body[0].value >= var.size :
                 return print("Out of range")
+            
             return VariableSymbol("Vector", var.type)
+        
         return print("Can't use range on {} in line {}".format(var.type_name, node.line_number))
 
 
@@ -191,7 +204,6 @@ class TypeChecker(NodeVisitor):
         
         global nested_loops_number
         nested_loops_number += 1
-        
         self.visit(node.instruction)
         nested_loops_number -= 1
         self.symbol_table = self.symbol_table.popScope()

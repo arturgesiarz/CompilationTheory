@@ -72,7 +72,6 @@ class Transposition(Node):
 class UMinus(Node):
     def __init__(self, factor, line_number=None):
         self.line_number = line_number
-
         self.factor = factor
 
 
