@@ -1,6 +1,4 @@
 import sys
-import ply.yacc as yacc
-
 import scanner
 import Mparser
 import TreePrinter
